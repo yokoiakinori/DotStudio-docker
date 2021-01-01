@@ -150,6 +150,7 @@ export default {
             }
 
             this.modalToggle();
+            this.showProductsList();
             const createdProduct = this.productionList.slice(-1)[0];
             this.currentProduct = createdProduct.uniquekey;
 

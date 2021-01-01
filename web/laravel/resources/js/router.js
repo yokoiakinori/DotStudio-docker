@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import TopPage from "./pages/TopPage.vue";
+import Search from "./pages/Search.vue";
 import TagSearch from "./pages/TagSearch.vue";
 import Login from "./pages/Login.vue";
 import Ranking from "./pages/Ranking.vue";
@@ -26,6 +27,16 @@ const routes = [
     {
         path: "/",
         component: TopPage
+    },
+    {
+        path: "/search",
+        component: Search,
+        props: route => {
+            const page = route.query.page;
+            return {
+                page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1
+            };
+        }
     },
     {
         path: "/tagsearch",
