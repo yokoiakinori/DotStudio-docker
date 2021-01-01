@@ -21,7 +21,7 @@
                 </ul>
             </modalWindow>
         </transition>
-        <ul class="UserProductions">
+        <ul class="UserProductions" v-if="productListLength > 0">
             <li
                 v-for="product in productionList"
                 :key="product.uniquekey"
@@ -93,8 +93,11 @@ export default {
         };
     },
     computed: {
-        alldot: function() {
+        alldot() {
             return this.linedot ** 2;
+        },
+        productListLength() {
+            return this.productionList.length;
         }
     },
     watch: {
@@ -103,6 +106,9 @@ export default {
                 await this.reset();
                 await this.showProductsList();
                 this.$store.commit("randing/loadingSwitch", false);
+                if (this.productListLength == 0) {
+                    this.modalToggle();
+                }
             },
             immediate: true
         },
@@ -200,11 +206,10 @@ export default {
                 for (let i = 0; i < response.data.data.length; i++) {
                     this.productionList.push(response.data.data[i]);
                 }
+                this.currentProduct = this.productionList[0].uniquekey;
+                this.currentPage = response.data.current_page;
+                this.lastPage = response.data.last_page;
             }
-
-            this.currentProduct = this.productionList[0].uniquekey;
-            this.currentPage = response.data.current_page;
-            this.lastPage = response.data.last_page;
         }
     },
     beforeDestroy() {

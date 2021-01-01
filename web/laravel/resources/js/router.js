@@ -8,6 +8,7 @@ import Ranking from "./pages/Ranking.vue";
 import UsersList from "./pages/UsersList.vue";
 import RankProduct from "./pages/RankProduct.vue";
 import UserDetail from "./pages/UserDetail.vue";
+import UserSettings from "./pages/UserSettings.vue";
 import FollowList from "./pages/FollowList.vue";
 import MyDrawing from "./pages/MyDrawing.vue";
 import ProductDetail from "./pages/ProductDetail.vue";
@@ -90,6 +91,18 @@ const routes = [
     {
         path: "/users/:id",
         component: UserDetail,
+        props: true
+    },
+    {
+        path: "/settings/:id",
+        component: UserSettings,
+        beforeEnter(to, from, next) {
+            if (store.getters["auth/check"]) {
+                next();
+            } else {
+                next("/login");
+            }
+        },
         props: true
     },
     {
