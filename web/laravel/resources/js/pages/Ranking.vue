@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <RankingNavbar />
+    <div class="wrap">
+        <RankingNavbar class="nav" />
         <RouterView />
     </div>
 </template>
@@ -14,4 +14,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.wrap {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+.nav {
+    width: 800px;
+}
+</style>

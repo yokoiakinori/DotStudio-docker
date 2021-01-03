@@ -88,6 +88,9 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    &__left{
+        justify-content: start;
+    }
     &__shadow{
         box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1);
     }
@@ -107,6 +110,11 @@ h1 {
         align-items: center;
         a {
             font-size: 14px;
+        }
+    }
+    &__item{
+        a{
+            opacity: 0.8;
             margin-right: 15px;
         }
     }
