@@ -3,34 +3,37 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 export default {
-    props:{
-        lineDotVolume:Number,
-        color:String,
-        mountedStatus:Boolean
+    props: {
+        lineDotVolume: Number,
+        color: Number,
+        mountedStatus: Boolean
     },
-    data(){
-        return{
-            dotStyle:{
-                backgroundColor:'white',
-                width:0,
-                height:0
+    data() {
+        return {
+            dotStyle: {
+                backgroundColor: "white",
+                width: 0,
+                height: 0
             }
+        };
+    },
+    watch: {
+        mountedStatus() {
+            this.dotStyle.width = 100 / this.lineDotVolume + "%";
+            this.dotStyle.height = 100 / this.lineDotVolume + "%";
+            this.dotStyle.backgroundColor = this.colorPalet[this.color];
         }
     },
-    watch:{
-        mountedStatus(){
-            this.dotStyle.width=100/this.lineDotVolume+'%'
-            this.dotStyle.height=100/this.lineDotVolume+'%'
-            this.dotStyle.backgroundColor=this.color
-        }
-    }
-}
+    computed: mapState({
+        colorPalet: state => state.maincanvas.paletColors
+    })
+};
 </script>
 
 <style lang="scss" scoped>
-li{
+li {
     list-style: none;
 }
 </style>

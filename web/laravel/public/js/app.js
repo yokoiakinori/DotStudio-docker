@@ -3750,13 +3750,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     lineDotVolume: Number,
-    color: String,
+    color: Number,
     mountedStatus: Boolean
   },
   data: function data() {
     return {
       dotStyle: {
-        backgroundColor: 'white',
+        backgroundColor: "white",
         width: 0,
         height: 0
       }
@@ -3764,11 +3764,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     mountedStatus: function mountedStatus() {
-      this.dotStyle.width = 100 / this.lineDotVolume + '%';
-      this.dotStyle.height = 100 / this.lineDotVolume + '%';
-      this.dotStyle.backgroundColor = this.color;
+      this.dotStyle.width = 100 / this.lineDotVolume + "%";
+      this.dotStyle.height = 100 / this.lineDotVolume + "%";
+      this.dotStyle.backgroundColor = this.colorPalet[this.color];
     }
-  }
+  },
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
+    colorPalet: function colorPalet(state) {
+      return state.maincanvas.paletColors;
+    }
+  })
 });
 
 /***/ }),
@@ -10491,7 +10496,7 @@ var render = function() {
       return _c("TodisplayDot", {
         key: dot,
         attrs: {
-          color: _vm.colors[dot - 1],
+          color: Number(_vm.colors[dot - 1]),
           lineDotVolume: _vm.product.linedot,
           mountedStatus: _vm.mountedStatus
         }
