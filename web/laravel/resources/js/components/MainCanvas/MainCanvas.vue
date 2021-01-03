@@ -4,10 +4,10 @@
             <Dot
                 v-for="item in allCanvasDot"
                 :key="item"
-                :dotid="item"
+                :dotId="item"
                 :drawingJudgement="drawingJudgement"
                 :lineDotVolume="lineDotVolume"
-                :color="color[item - 1]"
+                :inputColor="Number(colorNumber[item - 1])"
                 @mousedown.native="dragStart(item)"
                 @mouseup.native="dragEnd"
                 @saveProduct="saveProduct"
@@ -26,7 +26,7 @@ export default {
     data() {
         return {
             allCanvasDot: 0,
-            color: [],
+            colorNumber: [],
             dots: [],
             drawingJudgement: false,
             fillColor: null,
@@ -42,7 +42,8 @@ export default {
         drawingColor: state => state.maincanvas.drawingColor,
         drawingTool: state => state.maincanvas.drawingTool,
         saveStatus: state => state.maincanvas.saveStatus,
-        usedMaterial: state => state.maincanvas.saveMaterial
+        usedMaterial: state => state.maincanvas.saveMaterial,
+        colorPalet: state => state.maincanvas.paletColors
     }),
     watch: {
         async currentProduct(val) {
@@ -82,12 +83,12 @@ export default {
     },
     methods: {
         async beforeCurrentReset() {
-            this.color.length = 0;
+            this.colorNumber.splice(0, this.colorNumber.length);
             for (let i = 1; i <= this.allCanvasDot; i++) {
-                this.color.push("white");
+                this.colorNumber.push(0);
             }
             this.$nextTick(function() {
-                this.color.length = 0;
+                this.colorNumber.splice(0, this.colorNumber.length);
             });
             await this.sleep();
         },
@@ -97,7 +98,7 @@ export default {
             });
             for (let i = 1; i <= this.allCanvasDot; i++) {
                 const currentcolor = response.data[i - 1];
-                this.color.push(currentcolor);
+                this.colorNumber.push(currentcolor);
             }
         },
         dragStart(val) {
@@ -113,7 +114,7 @@ export default {
             ) {
                 this.secondClick = val; //check [watch:secondClick()]
             } else if (this.drawingTool == "fill") {
-                this.fillColor = this.color[val - 1]; //check [watch:fillColor()]
+                this.fillColor = this.colorNumber[val - 1]; //check [watch:fillColor()]
             } else if (this.drawingTool == "stamp") {
                 this.drawStamp(val);
             }
@@ -127,7 +128,6 @@ export default {
                 dots: this.dots,
                 usedMaterial: this.usedMaterial
             });
-            this.dots.length = 0;
         },
         saveProduct(data) {
             //このdataは子コンポーネントDotから送られてくる
@@ -145,11 +145,11 @@ export default {
         drawReset() {
             const answer = confirm("初期化してもよろしいですか？");
             if (answer) {
-                this.color.length = 0;
+                this.colorNumber.splice(0, this.colorNumber.length);
                 for (let i = 1; i <= this.allCanvasDot; i++) {
-                    this.color.push("white");
+                    this.colorNumber.push(0);
                     this.$nextTick(function() {
-                        this.color.length = 0;
+                        this.colorNumber.splice(0, this.colorNumber.length);
                     });
                 }
             }
@@ -188,10 +188,10 @@ export default {
             for (let i = 0; i <= this.lineDotVolume; i++) {
                 for (let j = 1; j <= this.lineDotVolume; j++) {
                     if (
-                        this.color[j + i * this.lineDotVolume - 1] ==
+                        this.colorNumber[j + i * this.lineDotVolume - 1] ==
                         this.fillColor
                     ) {
-                        this.color[
+                        this.colorNumber[
                             j + i * this.lineDotVolume - 1
                         ] = this.drawingColor;
                     }
@@ -206,14 +206,14 @@ export default {
             //横
             if (differenceNumber < this.lineDotVolume) {
                 for (let i = startNumber; i <= lastNumber; i++) {
-                    this.color[i - 1] = this.drawingColor;
+                    this.colorNumber[i - 1] = this.drawingColor;
                 }
             }
             //縦
             else if (differenceNumber % this.lineDotVolume == 0) {
                 const count = differenceNumber / this.lineDotVolume;
                 for (let i = 1; i <= count; i++) {
-                    this.color[
+                    this.colorNumber[
                         startNumber + i * this.lineDotVolume - 1
                     ] = this.drawingColor;
                 }
@@ -222,7 +222,7 @@ export default {
             else if (differenceNumber % (this.lineDotVolume + 1) == 0) {
                 const count = differenceNumber / this.lineDotVolume;
                 for (let i = 1; i <= count; i++) {
-                    this.color[
+                    this.colorNumber[
                         startNumber + i * (this.lineDotVolume + 1) - 1
                     ] = this.drawingColor;
                 }
@@ -244,7 +244,7 @@ export default {
                 startNumber + (differenceNumber % this.lineDotVolume);
             for (let i = 0; i <= count; i++) {
                 for (let j = startNumber; j <= rowEndNumber; j++) {
-                    this.color[
+                    this.colorNumber[
                         j + i * this.lineDotVolume - 1
                     ] = this.drawingColor;
                 }
@@ -262,18 +262,18 @@ export default {
             const columnEndNumber =
                 lastNumber - (differenceNumber % this.lineDotVolume);
             for (let i = startNumber; i <= rowEndNumber; i++) {
-                this.color[i - 1] = this.drawingColor;
+                this.colorNumber[i - 1] = this.drawingColor;
             }
             for (let i = 1; i <= count; i++) {
-                this.color[
+                this.colorNumber[
                     startNumber + i * this.lineDotVolume - 1
                 ] = this.drawingColor;
             }
             for (let i = columnEndNumber; i <= lastNumber; i++) {
-                this.color[i - 1] = this.drawingColor;
+                this.colorNumber[i - 1] = this.drawingColor;
             }
             for (let i = 1; i <= count; i++) {
-                this.color[
+                this.colorNumber[
                     rowEndNumber + i * this.lineDotVolume - 1
                 ] = this.drawingColor;
             }

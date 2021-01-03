@@ -10,7 +10,7 @@
                 <i
                     class="fas fa-palette"
                     :style="{ color: paletcolor.color }"
-                    @click="drawingColorInput(paletcolor.color, paletcolor.id)"
+                    @click="drawingColorInput(paletcolor.id)"
                 ></i>
             </li>
         </ul>
@@ -41,9 +41,9 @@ export default {
         };
     },
     methods: {
-        drawingColorInput(color, id) {
+        drawingColorInput(id) {
             this.currentpalet = id;
-            let drawingColor = color;
+            let drawingColor = id;
             this.$store.commit("maincanvas/drawingColor", drawingColor);
         },
         activeStyle(color) {

@@ -2310,9 +2310,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    drawingColorInput: function drawingColorInput(color, id) {
+    drawingColorInput: function drawingColorInput(id) {
       this.currentpalet = id;
-      var drawingColor = color;
+      var drawingColor = id;
       this.$store.commit("maincanvas/drawingColor", drawingColor);
     },
     activeStyle: function activeStyle(color) {
@@ -2552,18 +2552,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    color: String,
-    dotid: Number,
+    inputColor: Number,
+    dotId: Number,
     drawingJudgement: Boolean,
     lineDotVolume: Number
   },
   data: function data() {
     return {
       dotStyle: {
-        backgroundColor: 'white',
+        backgroundColor: "white",
         width: 0,
         height: 0
-      }
+      },
+      nowColor: 0
     };
   },
   methods: {
@@ -2573,27 +2574,28 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     draw: function draw() {
-      if (['brush', 'line', 'square', 'squareline'].includes(this.drawingTool)) {
-        this.dotStyle.backgroundColor = this.drawingColor;
-      } else if (this.drawingTool == 'eraser') {
-        this.dotStyle.backgroundColor = 'white';
+      if (["brush", "line", "square", "squareline"].includes(this.drawingTool)) {
+        this.nowColor = this.drawingColor;
+      } else if (this.drawingTool == "eraser") {
+        this.nowColor = 0;
       }
     }
   },
   watch: {
-    color: function color(val) {
-      if (typeof val == 'string') {
-        this.dotStyle.backgroundColor = val;
-      }
+    inputColor: function inputColor(val) {
+      this.nowColor = val;
+    },
+    nowColor: function nowColor(val) {
+      this.dotStyle.backgroundColor = this.colorPalet[val];
     },
     lineDotVolume: function lineDotVolume(val) {
-      this.dotStyle.width = 100 / val + '%';
-      this.dotStyle.height = 100 / val + '%';
+      this.dotStyle.width = 100 / val + "%";
+      this.dotStyle.height = 100 / val + "%";
     },
     saveStatus: function saveStatus() {
-      this.$emit('saveProduct', {
-        id: this.dotid,
-        color: this.dotStyle.backgroundColor
+      this.$emit("saveProduct", {
+        id: this.dotId,
+        color: this.nowColor
       });
     }
   },
@@ -2606,6 +2608,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     saveStatus: function saveStatus(state) {
       return state.maincanvas.saveStatus;
+    },
+    colorPalet: function colorPalet(state) {
+      return state.maincanvas.paletColors;
     }
   })
 });
@@ -2658,7 +2663,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       allCanvasDot: 0,
-      color: [],
+      colorNumber: [],
       dots: [],
       drawingJudgement: false,
       fillColor: null,
@@ -2686,6 +2691,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     usedMaterial: function usedMaterial(state) {
       return state.maincanvas.saveMaterial;
+    },
+    colorPalet: function colorPalet(state) {
+      return state.maincanvas.paletColors;
     }
   }),
   watch: {
@@ -2754,14 +2762,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _this2.color.length = 0;
+                _this2.colorNumber.splice(0, _this2.colorNumber.length);
 
                 for (i = 1; i <= _this2.allCanvasDot; i++) {
-                  _this2.color.push("white");
+                  _this2.colorNumber.push(0);
                 }
 
                 _this2.$nextTick(function () {
-                  this.color.length = 0;
+                  this.colorNumber.splice(0, this.colorNumber.length);
                 });
 
                 _context2.next = 5;
@@ -2795,7 +2803,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 for (i = 1; i <= _this3.allCanvasDot; i++) {
                   currentcolor = response.data[i - 1];
 
-                  _this3.color.push(currentcolor);
+                  _this3.colorNumber.push(currentcolor);
                 }
 
               case 4:
@@ -2814,7 +2822,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } else if (["line", "square", "squareline"].includes(this.drawingTool) && this.secondClick == null) {
         this.secondClick = val; //check [watch:secondClick()]
       } else if (this.drawingTool == "fill") {
-        this.fillColor = this.color[val - 1]; //check [watch:fillColor()]
+        this.fillColor = this.colorNumber[val - 1]; //check [watch:fillColor()]
       } else if (this.drawingTool == "stamp") {
         this.drawStamp(val);
       }
@@ -2840,9 +2848,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context4.sent;
-                _this4.dots.length = 0;
 
-              case 4:
+              case 3:
               case "end":
                 return _context4.stop();
             }
@@ -2866,12 +2873,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var answer = confirm("初期化してもよろしいですか？");
 
       if (answer) {
-        this.color.length = 0;
+        this.colorNumber.splice(0, this.colorNumber.length);
 
         for (var i = 1; i <= this.allCanvasDot; i++) {
-          this.color.push("white");
+          this.colorNumber.push(0);
           this.$nextTick(function () {
-            this.color.length = 0;
+            this.colorNumber.splice(0, this.colorNumber.length);
           });
         }
       }
@@ -2900,8 +2907,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       for (var i = 0; i <= this.lineDotVolume; i++) {
         for (var j = 1; j <= this.lineDotVolume; j++) {
-          if (this.color[j + i * this.lineDotVolume - 1] == this.fillColor) {
-            this.color[j + i * this.lineDotVolume - 1] = this.drawingColor;
+          if (this.colorNumber[j + i * this.lineDotVolume - 1] == this.fillColor) {
+            this.colorNumber[j + i * this.lineDotVolume - 1] = this.drawingColor;
           }
         }
       }
@@ -2915,21 +2922,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       if (differenceNumber < this.lineDotVolume) {
         for (var i = startNumber; i <= lastNumber; i++) {
-          this.color[i - 1] = this.drawingColor;
+          this.colorNumber[i - 1] = this.drawingColor;
         }
       } //縦
       else if (differenceNumber % this.lineDotVolume == 0) {
           var count = differenceNumber / this.lineDotVolume;
 
           for (var _i = 1; _i <= count; _i++) {
-            this.color[startNumber + _i * this.lineDotVolume - 1] = this.drawingColor;
+            this.colorNumber[startNumber + _i * this.lineDotVolume - 1] = this.drawingColor;
           }
         } //斜め（45度）
         else if (differenceNumber % (this.lineDotVolume + 1) == 0) {
             var _count = differenceNumber / this.lineDotVolume;
 
             for (var _i2 = 1; _i2 <= _count; _i2++) {
-              this.color[startNumber + _i2 * (this.lineDotVolume + 1) - 1] = this.drawingColor;
+              this.colorNumber[startNumber + _i2 * (this.lineDotVolume + 1) - 1] = this.drawingColor;
             }
           }
 
@@ -2951,7 +2958,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       for (var i = 0; i <= count; i++) {
         for (var j = startNumber; j <= rowEndNumber; j++) {
-          this.color[j + i * this.lineDotVolume - 1] = this.drawingColor;
+          this.colorNumber[j + i * this.lineDotVolume - 1] = this.drawingColor;
         }
       }
 
@@ -2968,19 +2975,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var columnEndNumber = lastNumber - differenceNumber % this.lineDotVolume;
 
       for (var i = startNumber; i <= rowEndNumber; i++) {
-        this.color[i - 1] = this.drawingColor;
+        this.colorNumber[i - 1] = this.drawingColor;
       }
 
       for (var _i3 = 1; _i3 <= count; _i3++) {
-        this.color[startNumber + _i3 * this.lineDotVolume - 1] = this.drawingColor;
+        this.colorNumber[startNumber + _i3 * this.lineDotVolume - 1] = this.drawingColor;
       }
 
       for (var _i4 = columnEndNumber; _i4 <= lastNumber; _i4++) {
-        this.color[_i4 - 1] = this.drawingColor;
+        this.colorNumber[_i4 - 1] = this.drawingColor;
       }
 
       for (var _i5 = 1; _i5 <= count; _i5++) {
-        this.color[rowEndNumber + _i5 * this.lineDotVolume - 1] = this.drawingColor;
+        this.colorNumber[rowEndNumber + _i5 * this.lineDotVolume - 1] = this.drawingColor;
       }
 
       this.firstClick = null;
@@ -3604,6 +3611,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   beforeDestroy: function beforeDestroy() {
     this.productionList.splice(0, this.productionList.length);
     this.$store.commit("maincanvas/resetProduct");
+    this.$store.commit("maincanvas/resetDrawing");
   }
 });
 
@@ -9593,7 +9601,7 @@ var render = function() {
               style: { color: paletcolor.color },
               on: {
                 click: function($event) {
-                  return _vm.drawingColorInput(paletcolor.color, paletcolor.id)
+                  return _vm.drawingColorInput(paletcolor.id)
                 }
               }
             })
@@ -9819,10 +9827,10 @@ var render = function() {
         return _c("Dot", {
           key: item,
           attrs: {
-            dotid: item,
+            dotId: item,
             drawingJudgement: _vm.drawingJudgement,
             lineDotVolume: _vm.lineDotVolume,
-            color: _vm.color[item - 1]
+            inputColor: Number(_vm.colorNumber[item - 1])
           },
           on: { saveProduct: _vm.saveProduct },
           nativeOn: {
@@ -34831,8 +34839,9 @@ var state = {
   allDotVolume: 900,
   currentMaterial: {},
   currentProduct: 0,
-  drawingColor: 'black',
-  drawingTool: 'brush',
+  paletColors: ["white", "black", "rgb(40%, 40%, 40%)", "rgb(70%, 70%, 70%)", "#f45757", "#27c227", "#4587d4", "#f3d54f", "#f488e1", "#57dcd5", "#62c3ae", "#e78f34", "#a03ee4"],
+  drawingColor: 1,
+  drawingTool: "brush",
   lineDotVolume: 30,
   saveMaterial: [],
   saveStatus: false,
@@ -34845,6 +34854,10 @@ var mutations = {
   },
   drawingTool: function drawingTool(state, tool) {
     state.drawingTool = tool;
+  },
+  resetDrawing: function resetDrawing(state) {
+    state.drawingColor = 1;
+    state.drawingTool = "brush";
   },
   productSave: function productSave(state) {
     state.saveStatus = !state.saveStatus;

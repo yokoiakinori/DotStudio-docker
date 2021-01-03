@@ -216,6 +216,7 @@ export default {
     beforeDestroy() {
         this.productionList.splice(0, this.productionList.length);
         this.$store.commit("maincanvas/resetProduct");
+        this.$store.commit("maincanvas/resetDrawing");
     }
 };
 </script>

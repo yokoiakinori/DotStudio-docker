@@ -32,7 +32,7 @@ class ProductController extends Controller
         $product->linedot = $request->linedot;
         $product->alldot = $request->alldot;
         $product->uniquekey = $request->uniquekey;
-        $product->colors = str_repeat("white_", $request->alldot);
+        $product->colors = str_repeat("0_", $request->alldot);
         $product->save();
 
         $tags = $request->tags;
