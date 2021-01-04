@@ -2515,8 +2515,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_loading_template__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-loading-template */ "./node_modules/vue-loading-template/dist/vueLoading.common.js");
-/* harmony import */ var vue_loading_template__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_loading_template__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_loading_template__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-loading-template */ "./node_modules/vue-loading-template/dist/vueLoading.common.js");
+/* harmony import */ var vue_loading_template__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_loading_template__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2529,7 +2529,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'loading',
   components: {
-    VueLoading: vue_loading_template__WEBPACK_IMPORTED_MODULE_1__["VueLoading"]
+    VueLoading: vue_loading_template__WEBPACK_IMPORTED_MODULE_0__["VueLoading"]
   }
 });
 

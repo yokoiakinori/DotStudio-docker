@@ -14,28 +14,28 @@ use Tests\TestCase;
 
 class UserThumbnailCreateApiTest extends TestCase
 {
-	use RefreshDatabase;
+    use RefreshDatabase;
 
-	public function setUp(): void
-	{
-		parent::setUp();
+    public function setUp(): void
+    {
+        parent::setUp();
 
-		$this->user = factory(User::class)->create();
-	}
+        $this->user = factory(User::class)->create();
+    }
 
-	/**
-	 * @test
-	 */
-	public function shouldCreateThumbnail()
-	{
-		Storage::fake('s3');
+    /**
+     * @test
+     */
+    public function shouldCreateThumbnail()
+    {
+        Storage::fake('s3');
 
-		$response = $this->actingAs($this->user)
-			->json('POST', route('thumbnail.create'));
-		$response->assertStatus(201);
+        $response = $this->actingAs($this->user)
+            ->json('POST', route('thumbnail.create'));
+        $response->assertStatus(201);
 
-		$userthumbnail = Userthumbnail::first();
+        $userthumbnail = Userthumbnail::first();
 
-		$this->assertRegExp('/dotstudio-default-thumbnail/', $userthumbnail->filestring);
-	}
+        $this->assertMatchesRegularExpression('/dotstudio-default-thumbnail/', $userthumbnail->filestring);
+    }
 }

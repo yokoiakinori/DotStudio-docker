@@ -14,66 +14,66 @@ use Tests\TestCase;
 
 class UserThumbnailSubmitApiTest extends TestCase
 {
-	use RefreshDatabase;
+    use RefreshDatabase;
 
-	public function setUp(): void
-	{
-		parent::setUp();
+    public function setUp(): void
+    {
+        parent::setUp();
 
-		$this->userthumbnail = factory(Userthumbnail::class)->create();
-		$this->user = User::first();
-	}
+        $this->userthumbnail = factory(Userthumbnail::class)->create();
+        $this->user = User::first();
+    }
 
-	/**
-	 * @test
-	 */
-	public function shouldUploadFile()
-	{
-		Storage::fake('s3');
+    /**
+     * @test
+     */
+    public function shouldUploadFile()
+    {
+        Storage::fake('s3');
 
-		$response = $this->actingAs($this->user)
-			->json('POST', route('thumbnail.update'), [
-				'userthumbnail' => UploadedFile::fake()->image('thumbnail.jpg'),
-			]);
-		$response->assertStatus(200);
+        $response = $this->actingAs($this->user)
+            ->json('POST', route('thumbnail.update'), [
+                'userthumbnail' => UploadedFile::fake()->image('thumbnail.jpg'),
+            ]);
+        $response->assertStatus(200);
 
-		$userthumbnail = Userthumbnail::first();
+        $userthumbnail = Userthumbnail::first();
 
-		$this->assertRegExp('/^[0-9a-zA-Z-_]{12}$/', $userthumbnail->filestring);
+        $this->assertMatchesRegularExpression('/^[0-9a-zA-Z-_]{12}$/', $userthumbnail->filestring);
 
-		Storage::cloud()->assertExists($userthumbnail->filename);
-	}
+        Storage::cloud()->assertExists($userthumbnail->filename);
+    }
 
-	/**
-	 * @test
-	 */
-	public function shouldDatabaseErrorNotSaved()
-	{
-		Schema::drop('userthumbnails');
-		Storage::fake('s3');
+    /**
+     * @test
+     */
+    public function shouldDatabaseErrorNotSaved()
+    {
+        Schema::drop('userthumbnails');
+        Storage::fake('s3');
 
-		$response = $this->actingAs($this->user)->json('POST', route('thumbnail.update'), [
-			'userthumbnail' => UploadedFile::fake()->image('thumbnail.jpg')
-		]);
+        $response = $this->actingAs($this->user)->json('POST', route('thumbnail.update'), [
+            'userthumbnail' => UploadedFile::fake()->image('thumbnail.jpg')
+        ]);
 
-		$response->assertStatus(500);
+        $response->assertStatus(500);
 
-		$this->assertEquals(0, count(Storage::cloud()->files()));
-	}
+        $this->assertEquals(0, count(Storage::cloud()->files()));
+    }
 
-	/**
-	 * @test
-	 */
-	public function shouldIfErrorNotSavedDatabase()
-	{
-		Storage::shouldReceive('cloud')
-			->once()
-			->andReturnNull();
+    /**
+     * @test
+     */
+    public function shouldIfErrorNotSavedDatabase()
+    {
+        Storage::shouldReceive('cloud')
+            ->once()
+            ->andReturnNull();
 
-		$response = $this->actingAs($this->user)->json('POST', route('thumbnail.update'), [
-			'userthumbnail' => UploadedFile::fake()->image('thumbnail.jpg')
-		]);
+        $response = $this->actingAs($this->user)->json('POST', route('thumbnail.update'), [
+            'userthumbnail' => UploadedFile::fake()->image('thumbnail.jpg')
+        ]);
 
-		$response->assertStatus(500);
-	}
+        $response->assertStatus(500);
+    }
 }

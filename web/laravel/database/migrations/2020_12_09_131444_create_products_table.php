@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('linedot');
             $table->text('colors');
             $table->timestamps();
+            $table->string('uniquekey');
 
             $table->foreign('user_id')->references('id')->on('users');
         });

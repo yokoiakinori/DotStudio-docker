@@ -10,27 +10,27 @@ use Illuminate\Support\Facades\DB;
 
 class FollowApiTest extends TestCase
 {
-	use RefreshDatabase;
+    use RefreshDatabase;
 
-	public function setUp(): void
-	{
-		parent::setUp();
+    public function setUp(): void
+    {
+        parent::setUp();
 
-		factory(User::class, 2)->create();
-		$this->user = User::first();
-	}
+        factory(User::class, 2)->create();
+        $this->user = User::first();
+    }
 
-	/**
-	 * @test
-	 */
-	public function shouldFollow()
-	{
-		$followee = 2;
-		$response = $this->actingAs($this->user)
-			->json('POST', route('user.follow', [
-				'id' => $followee,
-			]),);
-		$response->assertStatus(200)
-			->assertJsonFragment(["followee_id" => "2"]);
-	}
+    /**
+     * @test
+     */
+    public function shouldFollow()
+    {
+        $followee = 2;
+        $response = $this->actingAs($this->user)
+            ->json('PUT', route('user.follow', [
+                'id' => $followee,
+            ]),);
+        $response->assertStatus(200)
+            ->assertJsonFragment(["followee_id" => "2"]);
+    }
 }

@@ -10,32 +10,33 @@ use Tests\TestCase;
 
 class ProductCreateApiTest extends TestCase
 {
-	use RefreshDatabase;
+    use RefreshDatabase;
 
-	public function setUp(): void
-	{
-		parent::setUp();
+    public function setUp(): void
+    {
+        parent::setUp();
 
-		$this->user = factory(User::class)->create();
-	}
+        $this->user = factory(User::class)->create();
+    }
 
-	/**
-	 * @test
-	 */
-	public function should_createdProduct()
-	{
-		$data = [
-			'productname' => 'test product',
-			'alldot' => 100,
-			'linedot' => 10,
-		];
+    /**
+     * @test
+     */
+    public function should_createdProduct()
+    {
+        $data = [
+            'productname' => 'test product',
+            'alldot' => 100,
+            'linedot' => 10,
+            'uniquekey' => '202101011341568q452RN9'
+        ];
 
-		$response = $this->actingAs($this->user)->json('POST', route('product.create'), $data);
+        $response = $this->actingAs($this->user)->json('POST', route('product.create'), $data);
 
-		$product = Product::first();
-		$this->assertEquals($data['productname'], $product->productname);
+        $product = Product::first();
+        $this->assertEquals($data['productname'], $product->productname);
 
-		$response
-			->assertStatus(201);
-	}
+        $response
+            ->assertStatus(201);
+    }
 }
