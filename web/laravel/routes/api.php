@@ -37,7 +37,7 @@ Route::post('/thumbnail/update', 'UserthumbnailController@update')->name('thumbn
 
 Route::post('/notification', 'UserController@notificationInput')->name('notification.input');
 Route::get('/notification', 'UserController@notificationsList')->name('notification.list');
-Route::delete('/notification/{id}', 'UserController@notificationDelete')->name('notification.delete');
+Route::put('/notification/{id}', 'UserController@notificationChecked')->name('notification.checked');
 
 Route::post('/products', 'ProductController@create')->name('product.create');
 Route::get('/products', 'ProductController@list')->name('product.list');
@@ -55,7 +55,7 @@ Route::get('/materials', 'ProductController@materiallist')->name('materials.list
 Route::get('/search', 'ProductController@search')->name('product.search');
 Route::get('/tagsearch', 'ProductController@tagsearch')->name('product.tagsearch');
 Route::get('/refresh-token', function (Illuminate\Http\Request $request) {
-	$request->session()->regenerateToken();
+    $request->session()->regenerateToken();
 
-	return response()->json();
+    return response()->json();
 });

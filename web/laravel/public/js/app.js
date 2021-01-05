@@ -4506,6 +4506,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4523,13 +4527,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  _this.$store.commit('randing/loadingSwitch', true);
+                  _this.$store.commit("randing/loadingSwitch", true);
 
                   _context.next = 3;
                   return _this.showNotifications();
 
                 case 3:
-                  _this.$store.commit('randing/loadingSwitch', false);
+                  _this.$store.commit("randing/loadingSwitch", false);
 
                 case 4:
                 case "end":
@@ -4553,7 +4557,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.get('/api/notification');
+                return axios.get("/api/notification");
 
               case 2:
                 response = _context2.sent;
@@ -4567,7 +4571,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    deleteNotification: function deleteNotification(index) {
+    checkedNotification: function checkedNotification(index) {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
@@ -4578,14 +4582,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 id = _this3.notifications[index].id;
                 _context3.next = 3;
-                return axios["delete"]("/api/notification/".concat(id));
+                return axios.put("/api/notification/".concat(id));
 
               case 3:
                 response = _context3.sent;
 
-                _this3.notifications.splice(index, 1);
-
-              case 5:
+              case 4:
               case "end":
                 return _context3.stop();
             }
@@ -11314,29 +11316,36 @@ var render = function() {
       "ul",
       { staticClass: "notificationList" },
       _vm._l(_vm.notifications, function(notification, index) {
-        return _c("li", { key: notification.id }, [
-          _c("p", [_vm._v(_vm._s(notification.message))]),
-          _vm._v(" "),
-          _c("p", { staticClass: "created_at" }, [
-            _vm._v(_vm._s(notification.created_at))
-          ]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "formButton",
-              on: {
-                click: function($event) {
-                  return _vm.deleteNotification(index)
+        return _c(
+          "li",
+          {
+            key: notification.id,
+            class: { notification__unchecked: !notification.checked }
+          },
+          [
+            _c("p", [_vm._v(_vm._s(notification.message))]),
+            _vm._v(" "),
+            _c("p", { staticClass: "created_at" }, [
+              _vm._v(_vm._s(notification.created_at))
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "formButton",
+                on: {
+                  click: function($event) {
+                    return _vm.checkedNotification(index)
+                  }
                 }
-              }
-            },
-            [
-              _vm._v("\n\t\t\t\t確認済\n\t\t\t\t"),
-              _c("i", { staticClass: "fas fa-check" })
-            ]
-          )
-        ])
+              },
+              [
+                _vm._v("\n                確認済\n                "),
+                _c("i", { staticClass: "fas fa-check" })
+              ]
+            )
+          ]
+        )
       }),
       0
     )
