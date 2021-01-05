@@ -150,14 +150,12 @@ export default {
             }
 
             this.modalToggle();
-            this.showProductsList();
+            await this.showProductsList();
             const createdProduct = this.productionList.slice(-1)[0];
             this.currentProduct = createdProduct.uniquekey;
 
             const maxProductionList = 3;
-            if (this.productionList.length < maxProductionList) {
-                this.productionList.push(response.data);
-            } else {
+            if (this.productionList.length > maxProductionList) {
                 this.$router.push(
                     `/drawing?page=${Number(this.$route.query.page) + 1}`
                 );

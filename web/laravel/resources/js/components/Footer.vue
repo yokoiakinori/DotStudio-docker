@@ -1,9 +1,9 @@
 <template>
     <footer class="footer">
-        <button v-if="isLogin" class="button button--link" @click="logout">
-            Logout
+        <button v-if="isLogin" @click="logout">
+            ログアウト
         </button>
-        <RouterLink v-else class="button button--link" to="/login">
+        <RouterLink v-else to="/login">
             Login / Register
         </RouterLink>
     </footer>
@@ -31,3 +31,18 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../../sass/common.scss";
+footer {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button {
+        padding: 10px;
+        background-color: rgba($color: $maincolor, $alpha: 0.15);
+        border-radius: 5px;
+    }
+}
+</style>

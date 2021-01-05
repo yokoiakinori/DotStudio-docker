@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Scout\Searchable;
 
 class Product extends Model
 {
+    use Searchable;
     protected $guarded = array(
         'id',
         'user_id'
