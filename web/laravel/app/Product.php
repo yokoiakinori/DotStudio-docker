@@ -22,7 +22,7 @@ class Product extends Model
     ];
 
     protected $visible = [
-        'id', 'user', 'productname', 'alldot', 'linedot', 'colors', 'uniquekey', 'comments', 'likes_count', 'liked_by_user', 'producttags', 'usedmaterial'
+        'id', 'user', 'productname', 'alldot', 'linedot', 'colors', 'uniquekey', 'comments', 'likes_count', 'liked_by_user', 'producttags', 'usedmaterial', 'ispublished'
     ];
 
     public function user()
@@ -64,5 +64,10 @@ class Product extends Model
         return $this->likes->contains(function ($user) {
             return $user->id === Auth::user()->id;
         });
+    }
+
+    public function shouldBeSearchable()
+    {
+        return $this->ispublished;
     }
 }

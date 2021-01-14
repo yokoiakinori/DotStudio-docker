@@ -28,7 +28,8 @@ class ProductCreateApiTest extends TestCase
             'productname' => 'test product',
             'alldot' => 100,
             'linedot' => 10,
-            'uniquekey' => '202101011341568q452RN9'
+            'uniquekey' => '202101011341568q452RN9',
+            'ispublished' => false
         ];
 
         $response = $this->actingAs($this->user)->json('POST', route('product.create'), $data);

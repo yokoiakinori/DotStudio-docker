@@ -43,7 +43,7 @@ export default {
     methods: {
         async showProducts() {
             const response = await axios.get(
-                `/api/products/index/?page=${this.page}`
+                `/api/products/ranklist/like/?page=${this.page}`
             );
             if (response.status !== OK) {
                 this.$store.commit("error/setCode", response.status);

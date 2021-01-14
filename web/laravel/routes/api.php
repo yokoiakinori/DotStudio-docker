@@ -45,10 +45,11 @@ Route::post('/products/save', 'ProductController@dotsave')->name('product.save')
 Route::post('/products/current', 'ProductController@current')->name('product.current');
 Route::get('/products/index', 'ProductController@index')->name('product.index');
 Route::get('/product/{id}', 'ProductController@show')->name('product.show');
-Route::get('products/delete/{id}', 'ProductController@delete')->name('product.delete');
+Route::delete('/products/delete/{id}', 'ProductController@delete')->name('product.delete');
 Route::post('/products/{product}/comments', 'ProductController@addComment')->name('product.comment');
 Route::put('/products/{id}/like', 'ProductController@like')->name('product.like');
 Route::delete('/products/{id}/like', 'ProductController@unlike');
+Route::get('/products/ranklist/like', 'ProductController@likedrank')->name('product.likedrank');
 
 Route::put('/material/{id}', 'ProductController@materialadd')->name('material.add');
 Route::get('/materials', 'ProductController@materiallist')->name('materials.list');

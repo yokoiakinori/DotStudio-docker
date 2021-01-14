@@ -1,5 +1,6 @@
 <template>
     <nav class="navbar navbar__left">
+        <h3><i class="fas fa-crown"></i>ランキング</h3>
         <div v-for="nav in navigations" :key="nav.string" class="navbar__item">
             <RouterLink :to="{ name: nav.path, query: { page: 1 } }" exact>
                 {{ nav.string }}
@@ -33,5 +34,11 @@ export default {
 .router-link-active {
     font-weight: bold;
     opacity: 1 !important;
+}
+h3 {
+    margin-right: 40px;
+    i {
+        margin-right: 5px;
+    }
 }
 </style>

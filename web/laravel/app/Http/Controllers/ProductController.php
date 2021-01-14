@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductCreate;
 use App\Http\Requests\StoreComment;
-use App\Http\Requests\SearchProduct;
 use App\Product;
 use App\User;
 use App\Comment;
@@ -21,7 +20,7 @@ class ProductController extends Controller
     public function __construct()
     {
         // 認証が必要
-        $this->middleware('auth')->except(['index', 'show', 'search', 'tagsearch']);
+        $this->middleware('auth')->except(['index', 'show', 'search', 'tagsearch', 'likedrank']);
     }
 
     public function create(ProductCreate $request)
@@ -32,6 +31,7 @@ class ProductController extends Controller
         $product->linedot = $request->linedot;
         $product->alldot = $request->alldot;
         $product->uniquekey = $request->uniquekey;
+        $product->ispublished = $request->ispublished;
         $product->colors = str_repeat("0_", $request->alldot);
         $product->save();
 
@@ -146,6 +146,12 @@ class ProductController extends Controller
         $products = Product::whereIn('id', function ($query) use ($tag) {
             $query->from('producttags')->select('producttags.product_id')->where('producttags.message', $tag);
         })->paginate();
+        return $products;
+    }
+
+    public function likedrank()
+    {
+        $products = Product::with('user', 'likes', 'producttags')->withCount('likes')->orderBy('likes_count', 'desc')->paginate();
         return $products;
     }
 

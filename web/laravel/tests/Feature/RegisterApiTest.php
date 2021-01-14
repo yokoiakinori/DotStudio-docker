@@ -7,30 +7,31 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+
 class RegisterApiTest extends TestCase
 {
-	use RefreshDatabase;
+    use RefreshDatabase;
 
-	/**
-	 * @test
-	 */
-	public function should_createdUser()
-	{
-		$data = [
-			'name' => 'dotstudio user',
-			'email' => 'dummy@email.com',
-			'password' => 'test1234',
-			'password_confirmation' => 'test1234',
-			'introduction' => 'よろしくお願いします。'
-		];
+    /**
+     * @test
+     */
+    public function should_createdUser()
+    {
+        $data = [
+            'name' => 'dotstudio user',
+            'email' => 'dummy@email.com',
+            'password' => 'test1234',
+            'password_confirmation' => 'test1234',
+            'introduction' => 'よろしくお願いします。'
+        ];
 
-		$response = $this->json('POST', route('register'), $data);
+        $response = $this->json('POST', route('register'), $data);
 
-		$user = User::first();
-		$this->assertEquals($data['name'], $user->name);
+        $user = User::first();
+        $this->assertEquals($data['name'], $user->name);
 
-		$response
-			->assertStatus(201)
-			->assertJson(['name' => $user->name]);
-	}
+        $response
+            ->assertStatus(201)
+            ->assertJson(['name' => $user->name]);
+    }
 }

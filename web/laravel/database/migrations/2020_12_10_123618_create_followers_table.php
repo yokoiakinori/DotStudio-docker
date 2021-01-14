@@ -20,6 +20,7 @@ class CreateFollowersTable extends Migration
             $table->unsignedInteger('followee_id');
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('followee_id')->references('id')->on('users');
         });
     }
 

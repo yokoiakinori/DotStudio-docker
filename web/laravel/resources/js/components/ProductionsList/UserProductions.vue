@@ -139,7 +139,8 @@ export default {
                 alldot: Number(this.alldot),
                 linedot: Number(this.linedot),
                 tags: this.productTags,
-                uniquekey: getUniqueKey
+                uniquekey: getUniqueKey,
+                ispublished: true
             };
 
             const response = await axios.post("/api/products", createProduct);
@@ -169,7 +170,7 @@ export default {
             this.$store.commit("maincanvas/productSave");
         },
         async productDelete() {
-            const response = await axios.get(
+            const response = await axios.delete(
                 `/api/products/delete/${
                     this.productionList.find(
                         element => element.uniquekey == this.currentProduct

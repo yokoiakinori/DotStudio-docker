@@ -7,24 +7,19 @@ $heartcolor:rgb(211, 52, 78);
 *::after {
   box-sizing: border-box;
 }
-
+h1,h2,h3,p,label,li,a{
+    color: $maincolor;
+}
 
 p {
-	color: $maincolor;
 	margin: 0;
 }
 
-label {
-	color: $maincolor;
-}
-
 li {
-	color: $maincolor;
 	list-style: none;
 }
 
 a {
-	color: $maincolor;
 	text-decoration: none;
 }
 
@@ -55,7 +50,6 @@ button {
 	border: none;
 	background: none;
 	font-size: 14px;
-	color: $maincolor;
 
 	&:focus {
 		outline: none;
@@ -63,7 +57,6 @@ button {
 }
 
 i {
-	color: $maincolor;
 	transition-duration: 0.3s;
 }
 
@@ -72,12 +65,10 @@ i {
 }
 
 h2 {
-	color: $maincolor;
 	margin: 0;
 }
 
 h1 {
-	color: $maincolor;
 	margin: 0;
 	font-size: 25px;
 	font-weight: bold;

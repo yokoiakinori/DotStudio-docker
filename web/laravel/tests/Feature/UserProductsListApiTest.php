@@ -11,21 +11,21 @@ use Illuminate\Support\Facades\DB;
 
 class UserProductsListApiTest extends TestCase
 {
-	use RefreshDatabase;
+    use RefreshDatabase;
 
-	/**
-	 * @test
-	 */
-	public function UserProductsList()
-	{
-		factory(Product::class, 5)->create();
-		$userid = mt_rand(1, 5);
-		$response = $this->json('GET', route('user.products', [
-			'id' => $userid,
-		]));
-		$product = Product::where('user_id', $userid)->first();
+    /**
+     * @test
+     */
+    public function UserProductsList()
+    {
+        factory(Product::class, 5)->create();
+        $userid = mt_rand(1, 5);
+        $response = $this->json('GET', route('user.products', [
+            'id' => $userid,
+        ]));
+        $product = Product::where('user_id', $userid)->first();
 
-		$response->assertStatus(200)
-			->assertJsonFragment(['id' => $product->id]);
-	}
+        $response->assertStatus(200)
+            ->assertJsonFragment(['id' => $product->id]);
+    }
 }

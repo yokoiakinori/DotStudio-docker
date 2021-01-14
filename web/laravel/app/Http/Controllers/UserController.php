@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use PhpParser\Node\Expr\Cast\String_;
 
+use function Psy\debug;
+
 class UserController extends Controller
 {
     public function __construct()
@@ -24,7 +26,7 @@ class UserController extends Controller
     public function myacount()
     {
         Auth::user()->userthumbnail;
-        Auth::user()->followers;
+        Auth::user()->follows;
         $user = Auth::user();
         return $user;
     }
@@ -33,7 +35,8 @@ class UserController extends Controller
     {
         $users = User::with(['products' => function ($query) {
             $query->get();
-        }, 'userthumbnail', 'followers'])->orderBy(User::CREATED_AT, 'desc')->paginate();
+        }, 'userthumbnail', 'followers'])->withCount('followers')->orderBy('followers_count', 'desc')->paginate();
+
         return $users;
     }
 
@@ -52,11 +55,8 @@ class UserController extends Controller
 
     public function currentuser(String $id)
     {
-        $user = User::with('userthumbnail')->where('id', $id)->get();
-        $followerCount = Follower::where('user_id', $id)->count();
-        $followeeCount = Follower::where('followee_id', $id)->count();
-        $currentuser = $user->concat([$followerCount])->concat([$followeeCount]);
-        return $currentuser;
+        $user = User::with('userthumbnail', 'followers', 'follows')->where('id', $id)->get();
+        return $user;
     }
 
     public function updateuser(Request $request)

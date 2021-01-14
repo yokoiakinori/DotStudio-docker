@@ -17,14 +17,14 @@ class LogoutApiTest extends TestCase
 
         $this->user = factory(User::class)->create();
     }
-    
+
     /**
      * @test
      */
     public function should_authenticatedUserLogout()
     {
         $response = $this->actingAs($this->user)
-                         ->json('POST', route('logout'));
+            ->json('POST', route('logout'));
 
         $response->assertStatus(200);
         $this->assertGuest();
