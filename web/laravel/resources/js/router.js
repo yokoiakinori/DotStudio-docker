@@ -7,7 +7,8 @@ import TagSearch from "./pages/TagSearch.vue";
 import Login from "./pages/Login.vue";
 import Ranking from "./pages/Ranking.vue";
 import UsersList from "./pages/UsersList.vue";
-import RankProduct from "./pages/RankProduct.vue";
+import RankProductLike from "./pages/RankProductLike.vue";
+import RankProductWatch from "./pages/RankProductWatch.vue";
 import UserDetail from "./pages/UserDetail.vue";
 import UserSettings from "./pages/UserSettings.vue";
 import FollowList from "./pages/FollowList.vue";
@@ -87,9 +88,20 @@ const routes = [
                 }
             },
             {
-                path: "product",
-                name: "rank-product",
-                component: RankProduct,
+                path: "product/like",
+                name: "rank-product-like",
+                component: RankProductLike,
+                props: route => {
+                    const page = route.query.page;
+                    return {
+                        page: /^[1-9][0-9]*$/.test(page) ? page * 1 : 1
+                    };
+                }
+            },
+            {
+                path: "product/watch",
+                name: "rank-product-watch",
+                component: RankProductWatch,
                 props: route => {
                     const page = route.query.page;
                     return {

@@ -15,7 +15,8 @@ export default {
         return {
             navigations: [
                 { string: "ユーザー", path: "rank-users" },
-                { string: "作品", path: "rank-product" }
+                { string: "作品（いいね数）", path: "rank-product-like" },
+                { string: "作品（閲覧数）", path: "rank-product-watch" }
             ]
         };
     }

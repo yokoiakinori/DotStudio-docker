@@ -86,10 +86,10 @@ class ProductController extends Controller
 
     public function show(String $id)
     {
-        $product = Product::where('id', $id)->with('user', 'comments.user', 'likes', 'producttags')->first();
-        $uesdMaterialList = explode("_", $product->usedmaterial);
-        array_pop($uesdMaterialList);
-        $usedMaterials = Product::with('user')->whereIn('id', $uesdMaterialList)->orderBy(Product::CREATED_AT, 'desc')->get();
+        $product = Product::where('id', $id)->increment('countview')->with('user', 'comments.user', 'likes', 'producttags')->first();
+        $usedMaterialList = explode("_", $product->usedmaterial);
+        array_pop($usedMaterialList);
+        $usedMaterials = Product::with('user')->whereIn('id', $usedMaterialList)->orderBy(Product::CREATED_AT, 'desc')->get();
         $product->usedmaterial = $usedMaterials;
         return $product ?? abort(404);
     }
@@ -152,6 +152,12 @@ class ProductController extends Controller
     public function likedrank()
     {
         $products = Product::with('user', 'likes', 'producttags')->withCount('likes')->orderBy('likes_count', 'desc')->paginate();
+        return $products;
+    }
+
+    public function watchedrank()
+    {
+        $products = Product::with('user', 'likes', 'producttags')->orderBy('countview', 'desc')->paginate();
         return $products;
     }
 
