@@ -6,7 +6,7 @@ import Search from "./pages/Search.vue";
 import TagSearch from "./pages/TagSearch.vue";
 import Login from "./pages/Login.vue";
 import Ranking from "./pages/Ranking.vue";
-import UsersList from "./pages/UsersList.vue";
+import RankUserFollower from "./pages/RankUserFollower.vue";
 import RankProductLike from "./pages/RankProductLike.vue";
 import RankProductWatch from "./pages/RankProductWatch.vue";
 import UserDetail from "./pages/UserDetail.vue";
@@ -79,7 +79,7 @@ const routes = [
             {
                 path: "users",
                 name: "rank-users",
-                component: UsersList,
+                component: RankUserFollower,
                 props: route => {
                     const page = route.query.page;
                     return {

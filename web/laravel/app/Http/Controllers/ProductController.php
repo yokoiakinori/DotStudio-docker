@@ -54,7 +54,7 @@ class ProductController extends Controller
         return response($list, 200);
     }
 
-    public function dotsave(Request $request)
+    public function update(Request $request)
     {
         $currentid = $request->currentProduct;
         $product = Product::with('user')->where('id', $currentid)->first();

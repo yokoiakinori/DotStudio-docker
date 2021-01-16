@@ -41,7 +41,7 @@ Route::put('/notification/{id}', 'UserController@notificationChecked')->name('no
 
 Route::post('/products', 'ProductController@create')->name('product.create');
 Route::get('/products', 'ProductController@list')->name('product.list');
-Route::post('/products/save', 'ProductController@dotsave')->name('product.save');
+Route::post('/products/save', 'ProductController@update')->name('product.save');
 Route::post('/products/current', 'ProductController@current')->name('product.current');
 Route::get('/products/index', 'ProductController@index')->name('product.index');
 Route::get('/product/{id}', 'ProductController@show')->name('product.show');
