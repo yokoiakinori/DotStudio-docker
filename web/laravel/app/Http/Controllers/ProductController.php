@@ -7,6 +7,7 @@ use App\Http\Requests\StoreComment;
 use App\Product;
 use App\User;
 use App\Comment;
+use App\Like;
 use App\Producttag;
 use App\Materialproduct;
 use Illuminate\Http\Request;
@@ -25,33 +26,29 @@ class ProductController extends Controller
 
     public function create(ProductCreate $request)
     {
-        $product = new Product();
-        $product->user_id = Auth::id();
-        $product->productname = $request->productname;
-        $product->linedot = $request->linedot;
-        $product->alldot = $request->alldot;
-        $product->uniquekey = $request->uniquekey;
-        $product->ispublished = $request->ispublished;
-        $product->colors = str_repeat("0_", $request->alldot);
-        $product->save();
 
-        $tags = $request->tags;
-        if (!$tags == null) {
-            foreach ($tags as $tag) {
-                $producttag = new Producttag();
-                $producttag->product_id = $product->id;
-                $producttag->message = $tag;
-                $producttag->save();
+        DB::transaction(function () use ($request) {
+            $product = new Product();
+            $product->user_id = Auth::id();
+            $product->productname = $request->productname;
+            $product->linedot = $request->linedot;
+            $product->alldot = $request->alldot;
+            $product->uniquekey = $request->uniquekey;
+            $product->ispublished = $request->ispublished;
+            $product->colors = str_repeat("0_", $request->alldot);
+            $product->save();
+
+            $tags = $request->tags;
+            if (!$tags == null) {
+                foreach ($tags as $tag) {
+                    $producttag = new Producttag();
+                    $producttag->product_id = $product->id;
+                    $producttag->message = $tag;
+                    $producttag->save();
+                }
             }
-        }
-        return $product;
-    }
-
-    public function list()
-    {
-        $userid = Auth::id();
-        $list = Product::where('user_id', $userid)->orderBy('created_at', 'asc')->paginate(3);
-        return response($list, 200);
+            return $product;
+        });
     }
 
     public function update(Request $request)
@@ -69,6 +66,22 @@ class ProductController extends Controller
         $product->colors = $color;
         $product->usedmaterial = $usedmaterial;
         $product->save();
+    }
+
+    public function delete(String $id)
+    {
+        DB::transaction(function () use ($id) {
+            Comment::where('product_id', $id)->delete();
+            Like::where('product_id', $id)->delete();
+            Product::destroy($id);
+        });
+    }
+
+    public function list()
+    {
+        $userid = Auth::id();
+        $list = Product::where('user_id', $userid)->orderBy('created_at', 'asc')->paginate(3);
+        return response($list, 200);
     }
 
     public function current(Request $request)
@@ -92,11 +105,6 @@ class ProductController extends Controller
         $usedMaterials = Product::with('user')->whereIn('id', $usedMaterialList)->orderBy(Product::CREATED_AT, 'desc')->get();
         $product->usedmaterial = $usedMaterials;
         return $product ?? abort(404);
-    }
-
-    public function delete(String $id)
-    {
-        Product::destroy($id);
     }
 
     public function addComment(Product $product, StoreComment $request)
