@@ -43,7 +43,9 @@
 import Product from "../components/Products/Product.vue";
 import Axios from "axios";
 import { OK } from "../util";
+import notification from "../mixin/notification";
 export default {
+    mixins: [notification],
     components: {
         Product
     },
@@ -53,11 +55,7 @@ export default {
     },
     data() {
         return {
-            maxwidth: 400,
-            notification: {
-                message: String,
-                id: Number
-            }
+            maxwidth: 400
         };
     },
     computed: {
@@ -100,19 +98,13 @@ export default {
         async follow(val) {
             const response = await axios.put(`/api/user/${val}/follow`);
             await this.$store.dispatch("auth/currentUser");
-            this.followedNotification();
+            const message = `${this.authName}さんがあなたをフォローしました。`;
+            const id = this.user.id;
+            this.inputNotification(message, id); //mixin[notification]参照
         },
         async unfollow(val) {
             const response = await axios.delete(`/api/user/${val}/follow`);
             await this.$store.dispatch("auth/currentUser");
-        },
-        async followedNotification() {
-            this.notification.id = this.user.id;
-            this.notification.message = `${this.authName}さんが${this.user.name}さんをフォローしました。`;
-            const responsse = await axios.post(
-                "/api/notification",
-                this.notification
-            );
         }
     },
     watch: {}

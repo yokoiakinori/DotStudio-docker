@@ -64,7 +64,9 @@ import Axios from "axios";
 import { OK, CREATED, UNPROCESSABLE_ENTITY } from "../util";
 import Product from "../components/Products/Product.vue";
 import ProductTag from "../components/ProductTag.vue";
+import notification from "../mixin/notification";
 export default {
+    mixins: [notification],
     components: {
         Product,
         ProductTag
@@ -92,6 +94,9 @@ export default {
         },
         myProduct() {
             return this.product.user.id != this.$store.getters["auth/userid"];
+        },
+        authName() {
+            return this.$store.getters["auth/username"];
         }
     },
     watch: {
@@ -125,6 +130,9 @@ export default {
                 this.commentErrors = response.data.errors;
                 return false;
             }
+            const message = `${this.authName}さんがコメントしました。「${this.commentContent}」`;
+            const id = this.product.user.id;
+            this.inputNotification(message, id); //mixin[notification]参照
             this.commentContent = "";
             this.commentErrors = null;
 
@@ -135,71 +143,9 @@ export default {
 
             this.product.comments = [response.data, ...this.product.comments];
         },
-        onLikeClick({ id, liked }) {
-            if (!this.$store.getters["auth/check"]) {
-                alert("いいね機能を使うにはログインしてください。");
-                return false;
-            }
-
-            if (liked) {
-                this.unlike(id);
-            } else {
-                this.like(id);
-            }
-        },
-        async like(id) {
-            const response = await axios.put(`/api/products/${id}/like`);
-
-            if (response.status !== OK) {
-                this.$store.commit("error/setCode", response.status);
-                return false;
-            }
-
-            this.products = this.products.map(product => {
-                if (product.id == response.data.product_id) {
-                    product.likes_count += 1;
-                    product.liked_by_user = true;
-                    if (
-                        product.likes_count % 10 == 0 &&
-                        product.likes_count >= 10
-                    ) {
-                        this.likedNotification(
-                            product.productname,
-                            product.likes_count,
-                            product.user.id
-                        );
-                    }
-                }
-                return product;
-            });
-        },
-        async unlike(id) {
-            const response = await axios.delete(`/api/products/${id}/like`);
-
-            if (response.status !== OK) {
-                this.$store.commit("error/setCode", response.status);
-                return false;
-            }
-
-            this.products = this.products.map(product => {
-                if (product.id == response.data.product_id) {
-                    product.likes_count -= 1;
-                    product.liked_by_user = false;
-                }
-                return product;
-            });
-        },
-        async likedNotification(name, count, id) {
-            this.notification.id = id;
-            this.notification.message = `あなたの${name}が${count}回いいねされました。`;
-            const responsse = await axios.post(
-                "/api/notification",
-                this.notification
-            );
-        },
         onMaterialClick() {
             if (!this.$store.getters["auth/check"]) {
-                alert("いいね機能を使うにはログインしてください。");
+                alert("スタンプ機能を使うにはログインしてください。");
                 return false;
             }
             this.materialAdd();
@@ -213,6 +159,9 @@ export default {
                 this.$store.commit("error/setCode", response.status);
                 return false;
             }
+            const message = `${this.authName}さんがあなたの${this.product.productname}をスタンプとしてダウンロードしました。`;
+            const id = this.product.user.id;
+            this.inputNotification(message, id); //mixin[notification]参照
         }
     }
 };

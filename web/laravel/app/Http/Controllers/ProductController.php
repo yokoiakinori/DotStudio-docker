@@ -21,7 +21,7 @@ class ProductController extends Controller
     public function __construct()
     {
         // 認証が必要
-        $this->middleware('auth')->except(['index', 'show', 'search', 'tagsearch', 'likedrank']);
+        $this->middleware('auth')->except(['index', 'show', 'search', 'tagsearch', 'likedrank', 'watchedrank']);
     }
 
     public function create(ProductCreate $request)

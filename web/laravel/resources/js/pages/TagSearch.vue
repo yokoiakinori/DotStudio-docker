@@ -1,10 +1,18 @@
 <template>
-    <AllProducts
-        :products="products"
-        :currentPage="currentPage"
-        :lastPage="lastPage"
-        :routerPath="routerPath"
-    ></AllProducts>
+    <div>
+        <div class="info">
+            <i class="fas fa-tag"></i>
+            <h3>
+                <span>{{ searchTag }}</span> の検索結果
+            </h3>
+        </div>
+        <AllProducts
+            :products="products"
+            :currentPage="currentPage"
+            :lastPage="lastPage"
+            :routerPath="routerPath"
+        ></AllProducts>
+    </div>
 </template>
 
 <script>
@@ -66,6 +74,25 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../sass/common.scss";
+.info {
+    height: 80px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+}
+span {
+    font-size: 25px;
+}
+i {
+    font-size: 70px;
+    color: rgba($color: $maincolor, $alpha: 0.2);
+}
+h3 {
+    z-index: 2;
+    position: absolute;
+    left: 30px;
+}
 .Home {
     margin: 0 auto;
     margin-top: 0;
