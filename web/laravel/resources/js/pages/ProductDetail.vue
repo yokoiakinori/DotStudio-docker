@@ -24,6 +24,13 @@
                     }}が使用されています。
                 </li>
             </ul>
+            <div class="evaluations">
+                <p>
+                    <i class="fas fa-heart heartIcon"></i
+                    >{{ product.likes_count }}
+                </p>
+                <p><i class="fas fa-eye"></i>{{ product.countview }}</p>
+            </div>
         </div>
         <div class="comments">
             <h2>Comments</h2>
@@ -241,5 +248,15 @@ button {
 }
 .comments {
     margin: 0 0 30px 30px;
+}
+.evaluations {
+    display: flex;
+    i {
+        margin-right: 5px;
+    }
+    p {
+        font-size: 16px;
+        margin-right: 30px;
+    }
 }
 </style>

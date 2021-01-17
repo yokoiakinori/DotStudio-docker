@@ -27,7 +27,7 @@ class ProductController extends Controller
     public function create(ProductCreate $request)
     {
 
-        DB::transaction(function () use ($request) {
+        $product = DB::transaction(function () use ($request) {
             $product = new Product();
             $product->user_id = Auth::id();
             $product->productname = $request->productname;
@@ -49,6 +49,7 @@ class ProductController extends Controller
             }
             return $product;
         });
+        return $product;
     }
 
     public function update(Request $request)
@@ -99,7 +100,8 @@ class ProductController extends Controller
 
     public function show(String $id)
     {
-        $product = Product::where('id', $id)->increment('countview')->with('user', 'comments.user', 'likes', 'producttags')->first();
+        $product = Product::where('id', $id)->with('user', 'comments.user', 'likes', 'producttags')->first();
+        Product::where('id', $id)->increment('countview');
         $usedMaterialList = explode("_", $product->usedmaterial);
         array_pop($usedMaterialList);
         $usedMaterials = Product::with('user')->whereIn('id', $usedMaterialList)->orderBy(Product::CREATED_AT, 'desc')->get();

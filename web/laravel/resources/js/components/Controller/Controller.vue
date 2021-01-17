@@ -1,8 +1,9 @@
 <template>
     <div id="controller">
         <UserProduction />
-        <ColorPalet></ColorPalet>
-        <DrawTool></DrawTool>
+        <ColorPalet />
+        <DrawTool />
+        <MaterialList />
     </div>
 </template>
 
@@ -10,12 +11,14 @@
 import ColorPalet from "./Colorpalet/ColorPalet.vue";
 import UserProduction from "../ProductionsList/UserProductions.vue";
 import DrawTool from "./DrawTool/DrawTool.vue";
+import MaterialList from "./DrawTool/MaterialList.vue";
 
 export default {
     components: {
         ColorPalet,
         UserProduction,
-        DrawTool
+        DrawTool,
+        MaterialList
     }
 };
 </script>

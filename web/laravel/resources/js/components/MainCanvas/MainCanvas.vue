@@ -26,13 +26,13 @@ export default {
     data() {
         return {
             allCanvasDot: 0,
+            lineDotVolume: 0,
             colorNumber: [],
             dots: [],
             drawingJudgement: false,
             fillColor: null,
-            firstClick: null,
-            lineDotVolume: 0,
             materialColor: null,
+            firstClick: null,
             secondClick: null
         };
     },
@@ -55,8 +55,10 @@ export default {
             });
             await this.deploymentDot(val);
         },
-        currentMaterial() {
-            this.setMaterialColor();
+        currentMaterial(val) {
+            if (val != undefined) {
+                this.setMaterialColor();
+            }
         },
         drawingTool(val) {
             if (val == "reset") {

@@ -176,7 +176,6 @@ export default {
                 this.$store.commit("error/setCode", response.status);
                 return false;
             }
-            console.log(response);
             this.user.name = response.data[0].name;
             this.user.introduction = response.data[0].introduction;
             this.user.thumbnail = response.data[0].userthumbnail.url;
