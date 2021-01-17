@@ -170,7 +170,7 @@ export default {
                 const lineEnd = start + this.currentMaterial.linedot;
                 for (let i = 0; i < this.currentMaterial.linedot; i++) {
                     for (let j = start; j <= lineEnd; j++) {
-                        this.color[
+                        this.colorNumber[
                             j + i * this.lineDotVolume - 1
                         ] = this.materialColor[
                             j - start + i * this.currentMaterial.linedot

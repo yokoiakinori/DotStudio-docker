@@ -1,16 +1,22 @@
 <template>
     <div>
         <h2 class="pageTitle">通知一覧</h2>
-        <ul class="notificationList">
+        <ul class="notification__List">
             <li
-                v-for="(notification, index) in notifications"
+                v-for="notification in notifications"
                 :key="notification.id"
                 :class="{ notification__unchecked: !notification.checked }"
             >
-                <p>{{ notification.message }}</p>
-                <p class="created_at">{{ notification.created_at }}</p>
-                <button class="formButton" @click="checkedNotification(index)">
-                    確認済
+                <div>
+                    <p>{{ notification.message }}</p>
+                    <p class="created_at">{{ notification.created_at }}</p>
+                </div>
+                <button
+                    class="formButton"
+                    @click="checkedNotification(notification.id)"
+                    v-if="!notification.checked"
+                >
+                    確認
                     <i class="fas fa-check"></i>
                 </button>
             </li>
@@ -42,8 +48,8 @@ export default {
             this.notifications = response.data;
         },
         async checkedNotification(index) {
-            const id = this.notifications[index].id;
-            const response = await axios.put(`/api/notification/${id}`);
+            console.log(index);
+            const response = await axios.put(`/api/notification/${index}`);
         }
     }
 };
@@ -51,30 +57,38 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../sass/common.scss";
-.notificationList {
-    width: 600px;
-    margin: 0 auto;
-    li {
-        height: 50px;
-        padding: 15px 5px;
-        border-top: solid 1px $maincolor;
+.notification {
+    &__List {
+        width: 800px;
+        margin: 0 auto;
         display: flex;
-        flex-flow: column wrap;
-        justify-content: center;
-        p {
-            width: 490px;
+        flex-flow: column;
+        li {
+            height: 80px;
+            padding: 15px;
+            border-top: solid 1px $maincolor;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            div {
+                display: flex;
+                flex-flow: column;
+            }
+            button {
+                width: 100px;
+                height: 40px;
+                padding: 0;
+                border-radius: 5px;
+                border: solid 1px $maincolor;
+            }
         }
-        button {
-            width: 100px;
-            height: 40px;
-            padding: 0;
-            border-radius: 5px;
-            border: solid 1px $maincolor;
-        }
+    }
+    &__unchecked {
+        background-color: rgba($color: $subcolor, $alpha: 0.1);
     }
 }
 .created_at {
-    font-size: 14px;
+    font-size: 12px;
     color: rgba($maincolor, 0.5);
 }
 </style>

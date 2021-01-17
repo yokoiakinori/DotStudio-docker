@@ -3068,7 +3068,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
         for (var i = 0; i < this.currentMaterial.linedot; i++) {
           for (var j = start; j <= lineEnd; j++) {
-            this.color[j + i * this.lineDotVolume - 1] = this.materialColor[j - start + i * this.currentMaterial.linedot];
+            this.colorNumber[j + i * this.lineDotVolume - 1] = this.materialColor[j - start + i * this.currentMaterial.linedot];
           }
         }
 
@@ -4735,6 +4735,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4797,17 +4803,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     checkedNotification: function checkedNotification(index) {
-      var _this3 = this;
-
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var id, response;
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                id = _this3.notifications[index].id;
+                console.log(index);
                 _context3.next = 3;
-                return axios.put("/api/notification/".concat(id));
+                return axios.put("/api/notification/".concat(index));
 
               case 3:
                 response = _context3.sent;
@@ -7103,7 +7107,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "*[data-v-38e2c574],\n*[data-v-38e2c574]::before,\n*[data-v-38e2c574]::after {\n  box-sizing: border-box;\n}\nh1[data-v-38e2c574], h2[data-v-38e2c574], h3[data-v-38e2c574], p[data-v-38e2c574], label[data-v-38e2c574], li[data-v-38e2c574], a[data-v-38e2c574] {\n  color: #282D6F;\n}\np[data-v-38e2c574] {\n  margin: 0;\n}\nli[data-v-38e2c574] {\n  list-style: none;\n}\na[data-v-38e2c574] {\n  text-decoration: none;\n}\ninput[data-v-38e2c574] {\n  border: none;\n  background: none;\n}\ninput[data-v-38e2c574]:focus {\n  outline: none;\n}\n[data-v-38e2c574]::-webkit-input-placeholder {\n  color: rgba(40, 45, 111, 0.6);\n  font-size: 12px;\n}\ntextarea[data-v-38e2c574] {\n  border: none;\n  background: none;\n}\ntextarea[data-v-38e2c574]:focus {\n  outline: none;\n}\nbutton[data-v-38e2c574] {\n  border: none;\n  background: none;\n  font-size: 14px;\n}\nbutton[data-v-38e2c574]:focus {\n  outline: none;\n}\ni[data-v-38e2c574] {\n  transition-duration: 0.3s;\n}\n.heartIcon[data-v-38e2c574] {\n  color: #d3344e;\n}\nh2[data-v-38e2c574] {\n  margin: 0;\n}\nh1[data-v-38e2c574] {\n  margin: 0;\n  font-size: 25px;\n  font-weight: bold;\n}\n.navbar[data-v-38e2c574] {\n  height: 4rem;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 15px;\n}\n.navbar__left[data-v-38e2c574] {\n  justify-content: start;\n}\n.navbar__shadow[data-v-38e2c574] {\n  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1);\n}\n.navbar__brand[data-v-38e2c574] {\n  font-family: Merriweather, serif;\n  font-weight: bold;\n  font-size: 1.2rem;\n  margin-left: 15px;\n  transition-duration: 0.3s;\n}\n.navbar__brand[data-v-38e2c574]:hover {\n  opacity: 0.6;\n  transition-duration: 0.3s;\n}\n.navbar__menu[data-v-38e2c574] {\n  display: flex;\n  align-items: center;\n}\n.navbar__menu a[data-v-38e2c574] {\n  font-size: 14px;\n}\n.navbar__item a[data-v-38e2c574] {\n  opacity: 0.8;\n  margin-right: 15px;\n}\n.thumbnail[data-v-38e2c574] {\n  border-radius: 50%;\n  object-fit: cover;\n  width: 100%;\n  height: 100%;\n}\n.formButton[data-v-38e2c574] {\n  border: solid 1.5px #282D6F;\n  border-radius: 40px;\n  font-weight: bold;\n  color: #282D6F;\n  transition-duration: 0.3s;\n}\n.formButton[data-v-38e2c574]:hover {\n  transition-duration: 0.3s;\n  background-color: #282D6F;\n  color: white;\n}\n.formButton:hover i[data-v-38e2c574] {\n  color: white;\n  transition-duration: 0.3s;\n}\n.button[data-v-38e2c574] {\n  border: 1px solid rgba(40, 45, 111, 0.5);\n  border-radius: 0.25rem;\n  color: rgba(40, 45, 111, 0.6);\n  padding: 8px 15px;\n  background-color: rgba(40, 45, 111, 0.1);\n  transition-duration: 0.3s;\n}\n.button i[data-v-38e2c574] {\n  color: rgba(40, 45, 111, 0.6);\n  margin-right: 5px;\n}\n.button[data-v-38e2c574]:hover {\n  color: #282d6f;\n  border: 1px solid #282d6f;\n}\n.button:hover i[data-v-38e2c574] {\n  color: #282d6f;\n}\n.tab[data-v-38e2c574] {\n  display: flex;\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.tab__item[data-v-38e2c574] {\n  border-bottom: 2px solid rgba(40, 45, 111, 0.6);\n  color: rgba(40, 45, 111, 0.6);\n  cursor: pointer;\n  margin: 0 1rem 0 0;\n  padding: 1rem;\n}\n.tab__item--active[data-v-38e2c574] {\n  border-bottom: 2px solid #282D6F;\n  color: #282D6F;\n  font-weight: bold;\n}\n.container[data-v-38e2c574] {\n  margin: 0 auto;\n  max-width: 1200px;\n  padding: 0 2%;\n}\n.container--small[data-v-38e2c574] {\n  margin: 0 auto;\n  max-width: 600px;\n}\n.panel[data-v-38e2c574] {\n  border: 1px solid rgba(40, 45, 111, 0.4);\n  margin-top: 1rem;\n  padding: 1.5rem;\n}\n.form__item[data-v-38e2c574] {\n  border: 1px solid rgba(40, 45, 111, 0.4);\n  border-radius: 0.25rem;\n  font-size: 1rem;\n  margin-bottom: 1rem;\n  padding: 0.5em 0.75em;\n  width: 100%;\n}\n.form label[data-v-38e2c574] {\n  display: block;\n  margin-bottom: 0.5rem;\n}\n.form__output[data-v-38e2c574] {\n  display: block;\n  margin-bottom: 1rem;\n}\n.form__button[data-v-38e2c574] {\n  text-align: right;\n}\n.errors[data-v-38e2c574] {\n  border: 1px solid red;\n  border-radius: 0.25rem;\n  color: red;\n  margin-bottom: 1rem;\n}\n.pageTitle[data-v-38e2c574] {\n  margin: 0 auto;\n  text-align: center;\n  padding: 20px 0;\n}\n.notificationList[data-v-38e2c574] {\n  width: 600px;\n  margin: 0 auto;\n}\n.notificationList li[data-v-38e2c574] {\n  height: 50px;\n  padding: 15px 5px;\n  border-top: solid 1px #282D6F;\n  display: flex;\n  flex-flow: column wrap;\n  justify-content: center;\n}\n.notificationList li p[data-v-38e2c574] {\n  width: 490px;\n}\n.notificationList li button[data-v-38e2c574] {\n  width: 100px;\n  height: 40px;\n  padding: 0;\n  border-radius: 5px;\n  border: solid 1px #282D6F;\n}\n.created_at[data-v-38e2c574] {\n  font-size: 14px;\n  color: rgba(40, 45, 111, 0.5);\n}", ""]);
+exports.push([module.i, "*[data-v-38e2c574],\n*[data-v-38e2c574]::before,\n*[data-v-38e2c574]::after {\n  box-sizing: border-box;\n}\nh1[data-v-38e2c574], h2[data-v-38e2c574], h3[data-v-38e2c574], p[data-v-38e2c574], label[data-v-38e2c574], li[data-v-38e2c574], a[data-v-38e2c574] {\n  color: #282D6F;\n}\np[data-v-38e2c574] {\n  margin: 0;\n}\nli[data-v-38e2c574] {\n  list-style: none;\n}\na[data-v-38e2c574] {\n  text-decoration: none;\n}\ninput[data-v-38e2c574] {\n  border: none;\n  background: none;\n}\ninput[data-v-38e2c574]:focus {\n  outline: none;\n}\n[data-v-38e2c574]::-webkit-input-placeholder {\n  color: rgba(40, 45, 111, 0.6);\n  font-size: 12px;\n}\ntextarea[data-v-38e2c574] {\n  border: none;\n  background: none;\n}\ntextarea[data-v-38e2c574]:focus {\n  outline: none;\n}\nbutton[data-v-38e2c574] {\n  border: none;\n  background: none;\n  font-size: 14px;\n}\nbutton[data-v-38e2c574]:focus {\n  outline: none;\n}\ni[data-v-38e2c574] {\n  transition-duration: 0.3s;\n}\n.heartIcon[data-v-38e2c574] {\n  color: #d3344e;\n}\nh2[data-v-38e2c574] {\n  margin: 0;\n}\nh1[data-v-38e2c574] {\n  margin: 0;\n  font-size: 25px;\n  font-weight: bold;\n}\n.navbar[data-v-38e2c574] {\n  height: 4rem;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 15px;\n}\n.navbar__left[data-v-38e2c574] {\n  justify-content: start;\n}\n.navbar__shadow[data-v-38e2c574] {\n  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1);\n}\n.navbar__brand[data-v-38e2c574] {\n  font-family: Merriweather, serif;\n  font-weight: bold;\n  font-size: 1.2rem;\n  margin-left: 15px;\n  transition-duration: 0.3s;\n}\n.navbar__brand[data-v-38e2c574]:hover {\n  opacity: 0.6;\n  transition-duration: 0.3s;\n}\n.navbar__menu[data-v-38e2c574] {\n  display: flex;\n  align-items: center;\n}\n.navbar__menu a[data-v-38e2c574] {\n  font-size: 14px;\n}\n.navbar__item a[data-v-38e2c574] {\n  opacity: 0.8;\n  margin-right: 15px;\n}\n.thumbnail[data-v-38e2c574] {\n  border-radius: 50%;\n  object-fit: cover;\n  width: 100%;\n  height: 100%;\n}\n.formButton[data-v-38e2c574] {\n  border: solid 1.5px #282D6F;\n  border-radius: 40px;\n  font-weight: bold;\n  color: #282D6F;\n  transition-duration: 0.3s;\n}\n.formButton[data-v-38e2c574]:hover {\n  transition-duration: 0.3s;\n  background-color: #282D6F;\n  color: white;\n}\n.formButton:hover i[data-v-38e2c574] {\n  color: white;\n  transition-duration: 0.3s;\n}\n.button[data-v-38e2c574] {\n  border: 1px solid rgba(40, 45, 111, 0.5);\n  border-radius: 0.25rem;\n  color: rgba(40, 45, 111, 0.6);\n  padding: 8px 15px;\n  background-color: rgba(40, 45, 111, 0.1);\n  transition-duration: 0.3s;\n}\n.button i[data-v-38e2c574] {\n  color: rgba(40, 45, 111, 0.6);\n  margin-right: 5px;\n}\n.button[data-v-38e2c574]:hover {\n  color: #282d6f;\n  border: 1px solid #282d6f;\n}\n.button:hover i[data-v-38e2c574] {\n  color: #282d6f;\n}\n.tab[data-v-38e2c574] {\n  display: flex;\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.tab__item[data-v-38e2c574] {\n  border-bottom: 2px solid rgba(40, 45, 111, 0.6);\n  color: rgba(40, 45, 111, 0.6);\n  cursor: pointer;\n  margin: 0 1rem 0 0;\n  padding: 1rem;\n}\n.tab__item--active[data-v-38e2c574] {\n  border-bottom: 2px solid #282D6F;\n  color: #282D6F;\n  font-weight: bold;\n}\n.container[data-v-38e2c574] {\n  margin: 0 auto;\n  max-width: 1200px;\n  padding: 0 2%;\n}\n.container--small[data-v-38e2c574] {\n  margin: 0 auto;\n  max-width: 600px;\n}\n.panel[data-v-38e2c574] {\n  border: 1px solid rgba(40, 45, 111, 0.4);\n  margin-top: 1rem;\n  padding: 1.5rem;\n}\n.form__item[data-v-38e2c574] {\n  border: 1px solid rgba(40, 45, 111, 0.4);\n  border-radius: 0.25rem;\n  font-size: 1rem;\n  margin-bottom: 1rem;\n  padding: 0.5em 0.75em;\n  width: 100%;\n}\n.form label[data-v-38e2c574] {\n  display: block;\n  margin-bottom: 0.5rem;\n}\n.form__output[data-v-38e2c574] {\n  display: block;\n  margin-bottom: 1rem;\n}\n.form__button[data-v-38e2c574] {\n  text-align: right;\n}\n.errors[data-v-38e2c574] {\n  border: 1px solid red;\n  border-radius: 0.25rem;\n  color: red;\n  margin-bottom: 1rem;\n}\n.pageTitle[data-v-38e2c574] {\n  margin: 0 auto;\n  text-align: center;\n  padding: 20px 0;\n}\n.notification__List[data-v-38e2c574] {\n  width: 800px;\n  margin: 0 auto;\n  display: flex;\n  flex-flow: column;\n}\n.notification__List li[data-v-38e2c574] {\n  height: 80px;\n  padding: 15px;\n  border-top: solid 1px #282D6F;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.notification__List li div[data-v-38e2c574] {\n  display: flex;\n  flex-flow: column;\n}\n.notification__List li button[data-v-38e2c574] {\n  width: 100px;\n  height: 40px;\n  padding: 0;\n  border-radius: 5px;\n  border: solid 1px #282D6F;\n}\n.notification__unchecked[data-v-38e2c574] {\n  background-color: rgba(63, 178, 128, 0.1);\n}\n.created_at[data-v-38e2c574] {\n  font-size: 12px;\n  color: rgba(40, 45, 111, 0.5);\n}", ""]);
 
 // exports
 
@@ -12145,8 +12149,8 @@ var render = function() {
     _vm._v(" "),
     _c(
       "ul",
-      { staticClass: "notificationList" },
-      _vm._l(_vm.notifications, function(notification, index) {
+      { staticClass: "notification__List" },
+      _vm._l(_vm.notifications, function(notification) {
         return _c(
           "li",
           {
@@ -12154,27 +12158,31 @@ var render = function() {
             class: { notification__unchecked: !notification.checked }
           },
           [
-            _c("p", [_vm._v(_vm._s(notification.message))]),
-            _vm._v(" "),
-            _c("p", { staticClass: "created_at" }, [
-              _vm._v(_vm._s(notification.created_at))
+            _c("div", [
+              _c("p", [_vm._v(_vm._s(notification.message))]),
+              _vm._v(" "),
+              _c("p", { staticClass: "created_at" }, [
+                _vm._v(_vm._s(notification.created_at))
+              ])
             ]),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "formButton",
-                on: {
-                  click: function($event) {
-                    return _vm.checkedNotification(index)
-                  }
-                }
-              },
-              [
-                _vm._v("\n                確認済\n                "),
-                _c("i", { staticClass: "fas fa-check" })
-              ]
-            )
+            !notification.checked
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "formButton",
+                    on: {
+                      click: function($event) {
+                        return _vm.checkedNotification(notification.id)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v("\n                確認\n                "),
+                    _c("i", { staticClass: "fas fa-check" })
+                  ]
+                )
+              : _vm._e()
           ]
         )
       }),

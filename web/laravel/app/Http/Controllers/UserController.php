@@ -129,5 +129,6 @@ class UserController extends Controller
     {
         $notification = Notification::find($id);
         $notification->checked = true;
+        $notification->save();
     }
 }
