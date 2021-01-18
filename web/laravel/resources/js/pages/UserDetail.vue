@@ -1,8 +1,8 @@
 <template>
     <div class="userDetail">
-        <div class="userInformation">
+        <div class="userInformation" v-if="appear">
             <img
-                :src="user.thumbnail"
+                :src="user.userthumbnail.url"
                 :alt="`${user.name}のサムネイル`"
                 class="thumbnail infomationItem"
             />
@@ -11,13 +11,19 @@
                 <p class="userintroduction">{{ user.introduction }}</p>
             </div>
             <div class="infomationItem">
-                <router-link :to="`/follow/${id}`">
+                <router-link
+                    :to="`/follow/${id}`"
+                    class="linkButton followLink"
+                >
                     フォロー
-                    <span>{{ user.follow.length }}</span>
+                    <span>{{ user.follows.length }}</span>
                 </router-link>
-                <router-link :to="`/follower/${id}`">
+                <router-link
+                    :to="`/follower/${id}`"
+                    class="linkButton followLink"
+                >
                     フォロワー
-                    <span>{{ user.follower.length }}</span>
+                    <span>{{ user.followers.length }}</span>
                 </router-link>
             </div>
             <router-link
@@ -87,18 +93,13 @@ export default {
             lastPage: 0,
             maxwidth: 900,
             products: [],
+            appear: false,
             style: {
                 width: "900px",
                 height: "1500px"
             },
             tab: 1,
-            user: {
-                follow: [],
-                follower: [],
-                introduction: String,
-                name: String,
-                thumbnail: String
-            }
+            user: {}
         };
     },
     computed: {
@@ -118,8 +119,9 @@ export default {
             async handler() {
                 this.$store.commit("randing/loadingSwitch", true);
                 await this.showUser();
-                await this.showProducts();
+                this.showProducts();
                 this.$store.commit("randing/loadingSwitch", false);
+                this.appear = true;
             },
             immediate: true
         },
@@ -176,11 +178,7 @@ export default {
                 this.$store.commit("error/setCode", response.status);
                 return false;
             }
-            this.user.name = response.data[0].name;
-            this.user.introduction = response.data[0].introduction;
-            this.user.thumbnail = response.data[0].userthumbnail.url;
-            this.user.follow = response.data[0].follows;
-            this.user.follower = response.data[0].followers;
+            this.user = response.data[0];
         },
         async like(id) {
             const response = await axios.put(`/api/products/${id}/like`);
@@ -221,6 +219,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../sass/common.scss";
 .userDetail {
+    padding-top: 30px;
     margin: 0 auto;
     margin-top: 0;
     display: flex;
@@ -230,17 +229,17 @@ export default {
 }
 .userInformation {
     width: 850px;
-    padding-top: 30px;
     display: flex;
+    align-items: center;
     div {
         margin-left: 20px;
     }
 }
-.infomationItem:last-child {
-    margin-left: auto;
-}
 h2 {
     margin-bottom: 10px;
+}
+.followLink {
+    margin: 15px;
 }
 .productsList {
     display: flex;
