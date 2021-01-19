@@ -6,29 +6,29 @@
                 :alt="`${user.name}のサムネイル`"
                 class="thumbnail infomationItem"
             />
-            <div class="infomationItem">
+            <div class="informationItem columen">
                 <h2 class="username">{{ user.name }}</h2>
                 <p class="userintroduction">{{ user.introduction }}</p>
             </div>
-            <div class="infomationItem">
-                <router-link
-                    :to="`/follow/${id}`"
-                    class="linkButton followLink"
-                >
-                    フォロー
-                    <span>{{ user.follows.length }}</span>
-                </router-link>
-                <router-link
-                    :to="`/follower/${id}`"
-                    class="linkButton followLink"
-                >
-                    フォロワー
-                    <span>{{ user.followers.length }}</span>
-                </router-link>
+            <div class="informationItem">
+                <p>
+                    <router-link :to="`/follow/${id}`">
+                        <span>{{ user.follows.length }}</span
+                        ><br />
+                        フォロー
+                    </router-link>
+                </p>
+                <p>
+                    <router-link :to="`/follower/${id}`">
+                        <span>{{ user.followers.length }}</span>
+                        <br />
+                        フォロワー
+                    </router-link>
+                </p>
             </div>
             <router-link
                 :to="`/settings/${id}`"
-                class="infomationItem"
+                class="settings"
                 v-if="id == userid"
             >
                 <i class="fas fa-cog"></i>
@@ -231,15 +231,34 @@ export default {
     width: 850px;
     display: flex;
     align-items: center;
-    div {
-        margin-left: 20px;
+}
+.informationItem {
+    border-right: solid 1px $maincolor;
+    display: flex;
+    padding: 0 15px;
+    p {
+        text-align: center;
+        margin: 0 10px;
     }
+    span {
+        font-weight: bold;
+        font-size: 27px;
+        color: $maincolor;
+    }
+    a {
+        font-size: 13px;
+        color: rgba($color: $maincolor, $alpha: 0.6);
+    }
+}
+.columen {
+    flex-flow: column;
 }
 h2 {
     margin-bottom: 10px;
 }
-.followLink {
-    margin: 15px;
+.settings {
+    margin-left: 20px;
+    font-size: 20px;
 }
 .productsList {
     display: flex;

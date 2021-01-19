@@ -138,25 +138,6 @@ h1 {
 		}
 	}
 }
-.linkButton {
-    border: solid 1.5px $maincolor;
-    padding:15px ;
-	border-radius: 10px;
-	font-weight: bold;
-	color: $maincolor;
-	transition-duration: 0.3s;
-
-	&:hover {
-		transition-duration: 0.3s;
-		background-color: $maincolor;
-		color: white;
-
-		i {
-			color: white;
-			transition-duration: 0.3s;
-		}
-	}
-}
 
 .button{
     border: 1px solid rgba($maincolor, 0.5);
