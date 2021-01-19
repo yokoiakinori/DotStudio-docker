@@ -25,6 +25,7 @@
                 </li>
             </ul>
             <div class="evaluations">
+                <ThumbnailImage :user="product.user" class="thumbnail" />
                 <p>
                     <i class="fas fa-heart heartIcon"></i
                     >{{ product.likes_count }}
@@ -64,12 +65,14 @@ import Axios from "axios";
 import { OK, CREATED, UNPROCESSABLE_ENTITY } from "../util";
 import Product from "../components/Products/Product.vue";
 import ProductTag from "../components/ProductTag.vue";
+import ThumbnailImage from "../components/ThumbnailImage.vue";
 import notification from "../mixin/notification";
 export default {
     mixins: [notification],
     components: {
         Product,
-        ProductTag
+        ProductTag,
+        ThumbnailImage
     },
     props: {
         id: {
@@ -182,6 +185,10 @@ button {
 }
 .button--liked {
     background-color: hotpink;
+}
+.thumbnail {
+    width: 45px;
+    height: auto;
 }
 .productInformation {
     width: 500px;

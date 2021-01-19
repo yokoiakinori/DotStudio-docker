@@ -4865,7 +4865,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util */ "./resources/js/util.js");
 /* harmony import */ var _components_Products_Product_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Products/Product.vue */ "./resources/js/components/Products/Product.vue");
 /* harmony import */ var _components_ProductTag_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/ProductTag.vue */ "./resources/js/components/ProductTag.vue");
-/* harmony import */ var _mixin_notification__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../mixin/notification */ "./resources/js/mixin/notification.js");
+/* harmony import */ var _components_ThumbnailImage_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/ThumbnailImage.vue */ "./resources/js/components/ThumbnailImage.vue");
+/* harmony import */ var _mixin_notification__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../mixin/notification */ "./resources/js/mixin/notification.js");
 
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -4945,16 +4946,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+
 
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [_mixin_notification__WEBPACK_IMPORTED_MODULE_5__["default"]],
+  mixins: [_mixin_notification__WEBPACK_IMPORTED_MODULE_6__["default"]],
   components: {
     Product: _components_Products_Product_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    ProductTag: _components_ProductTag_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    ProductTag: _components_ProductTag_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    ThumbnailImage: _components_ThumbnailImage_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   props: {
     id: {
@@ -7142,7 +7146,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "*[data-v-43d28932],\n*[data-v-43d28932]::before,\n*[data-v-43d28932]::after {\n  box-sizing: border-box;\n}\nh1[data-v-43d28932], h2[data-v-43d28932], h3[data-v-43d28932], p[data-v-43d28932], label[data-v-43d28932], li[data-v-43d28932], a[data-v-43d28932] {\n  color: #282D6F;\n}\np[data-v-43d28932] {\n  margin: 0;\n}\nli[data-v-43d28932] {\n  list-style: none;\n}\na[data-v-43d28932] {\n  text-decoration: none;\n}\ninput[data-v-43d28932] {\n  border: none;\n  background: none;\n}\ninput[data-v-43d28932]:focus {\n  outline: none;\n}\n[data-v-43d28932]::-webkit-input-placeholder {\n  color: rgba(40, 45, 111, 0.6);\n  font-size: 12px;\n}\ntextarea[data-v-43d28932] {\n  border: none;\n  background: none;\n}\ntextarea[data-v-43d28932]:focus {\n  outline: none;\n}\nbutton[data-v-43d28932] {\n  border: none;\n  background: none;\n  font-size: 14px;\n}\nbutton[data-v-43d28932]:focus {\n  outline: none;\n}\ni[data-v-43d28932] {\n  transition-duration: 0.3s;\n}\n.heartIcon[data-v-43d28932] {\n  color: #d3344e;\n}\nh2[data-v-43d28932] {\n  margin: 0;\n}\nh1[data-v-43d28932] {\n  margin: 0;\n  font-size: 25px;\n  font-weight: bold;\n}\n.navbar[data-v-43d28932] {\n  height: 4rem;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 15px;\n}\n.navbar__left[data-v-43d28932] {\n  justify-content: start;\n}\n.navbar__shadow[data-v-43d28932] {\n  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1);\n}\n.navbar__brand[data-v-43d28932] {\n  font-family: Merriweather, serif;\n  font-weight: bold;\n  font-size: 1.2rem;\n  margin-left: 15px;\n  transition-duration: 0.3s;\n}\n.navbar__brand[data-v-43d28932]:hover {\n  opacity: 0.6;\n  transition-duration: 0.3s;\n}\n.navbar__menu[data-v-43d28932] {\n  display: flex;\n  align-items: center;\n}\n.navbar__menu a[data-v-43d28932] {\n  font-size: 14px;\n}\n.navbar__item a[data-v-43d28932] {\n  opacity: 0.8;\n  margin-right: 15px;\n}\n.thumbnail[data-v-43d28932] {\n  border-radius: 50%;\n  object-fit: cover;\n  width: 100%;\n  height: 100%;\n}\n.formButton[data-v-43d28932] {\n  border: solid 1.5px #282D6F;\n  border-radius: 40px;\n  font-weight: bold;\n  color: #282D6F;\n  transition-duration: 0.3s;\n}\n.formButton[data-v-43d28932]:hover {\n  transition-duration: 0.3s;\n  background-color: #282D6F;\n  color: white;\n}\n.formButton:hover i[data-v-43d28932] {\n  color: white;\n  transition-duration: 0.3s;\n}\n.button[data-v-43d28932] {\n  border: 1px solid rgba(40, 45, 111, 0.5);\n  border-radius: 0.25rem;\n  color: rgba(40, 45, 111, 0.6);\n  padding: 8px 15px;\n  background-color: rgba(40, 45, 111, 0.1);\n  transition-duration: 0.3s;\n}\n.button i[data-v-43d28932] {\n  color: rgba(40, 45, 111, 0.6);\n  margin-right: 5px;\n}\n.button[data-v-43d28932]:hover {\n  color: #282d6f;\n  border: 1px solid #282d6f;\n}\n.button:hover i[data-v-43d28932] {\n  color: #282d6f;\n}\n.tab[data-v-43d28932] {\n  display: flex;\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.tab__item[data-v-43d28932] {\n  border-bottom: 2px solid rgba(40, 45, 111, 0.6);\n  color: rgba(40, 45, 111, 0.6);\n  cursor: pointer;\n  margin: 0 1rem 0 0;\n  padding: 1rem;\n}\n.tab__item--active[data-v-43d28932] {\n  border-bottom: 2px solid #282D6F;\n  color: #282D6F;\n  font-weight: bold;\n}\n.container[data-v-43d28932] {\n  margin: 0 auto;\n  max-width: 1200px;\n  padding: 0 2%;\n}\n.container--small[data-v-43d28932] {\n  margin: 0 auto;\n  max-width: 600px;\n}\n.panel[data-v-43d28932] {\n  border: 1px solid rgba(40, 45, 111, 0.4);\n  margin-top: 1rem;\n  padding: 1.5rem;\n}\n.form__item[data-v-43d28932] {\n  border: 1px solid rgba(40, 45, 111, 0.4);\n  border-radius: 0.25rem;\n  font-size: 1rem;\n  margin-bottom: 1rem;\n  padding: 0.5em 0.75em;\n  width: 100%;\n}\n.form label[data-v-43d28932] {\n  display: block;\n  margin-bottom: 0.5rem;\n}\n.form__output[data-v-43d28932] {\n  display: block;\n  margin-bottom: 1rem;\n}\n.form__button[data-v-43d28932] {\n  text-align: right;\n}\n.errors[data-v-43d28932] {\n  border: 1px solid red;\n  border-radius: 0.25rem;\n  color: red;\n  margin-bottom: 1rem;\n}\n.pageTitle[data-v-43d28932] {\n  margin: 0 auto;\n  text-align: center;\n  padding: 20px 0;\n}\nbutton[data-v-43d28932] {\n  height: 40px;\n  padding: 0 40px;\n}\n.productDetail[data-v-43d28932] {\n  display: flex;\n  flex-flow: row wrap;\n  width: 1000px;\n  margin: 0 auto;\n  padding-top: 15px;\n}\n.button--liked[data-v-43d28932] {\n  background-color: hotpink;\n}\n.productInformation[data-v-43d28932] {\n  width: 500px;\n  height: 400px;\n  margin-top: 15px;\n}\n.productInformation ul[data-v-43d28932] {\n  display: flex;\n}\n.productInformation ul li[data-v-43d28932] {\n  display: flex;\n  align-items: center;\n}\n.comments[data-v-43d28932] {\n  margin: 0 0 30px 30px;\n}\n.evaluations[data-v-43d28932] {\n  display: flex;\n}\n.evaluations i[data-v-43d28932] {\n  margin-right: 5px;\n}\n.evaluations p[data-v-43d28932] {\n  font-size: 16px;\n  margin-right: 30px;\n}", ""]);
+exports.push([module.i, "*[data-v-43d28932],\n*[data-v-43d28932]::before,\n*[data-v-43d28932]::after {\n  box-sizing: border-box;\n}\nh1[data-v-43d28932], h2[data-v-43d28932], h3[data-v-43d28932], p[data-v-43d28932], label[data-v-43d28932], li[data-v-43d28932], a[data-v-43d28932] {\n  color: #282D6F;\n}\np[data-v-43d28932] {\n  margin: 0;\n}\nli[data-v-43d28932] {\n  list-style: none;\n}\na[data-v-43d28932] {\n  text-decoration: none;\n}\ninput[data-v-43d28932] {\n  border: none;\n  background: none;\n}\ninput[data-v-43d28932]:focus {\n  outline: none;\n}\n[data-v-43d28932]::-webkit-input-placeholder {\n  color: rgba(40, 45, 111, 0.6);\n  font-size: 12px;\n}\ntextarea[data-v-43d28932] {\n  border: none;\n  background: none;\n}\ntextarea[data-v-43d28932]:focus {\n  outline: none;\n}\nbutton[data-v-43d28932] {\n  border: none;\n  background: none;\n  font-size: 14px;\n}\nbutton[data-v-43d28932]:focus {\n  outline: none;\n}\ni[data-v-43d28932] {\n  transition-duration: 0.3s;\n}\n.heartIcon[data-v-43d28932] {\n  color: #d3344e;\n}\nh2[data-v-43d28932] {\n  margin: 0;\n}\nh1[data-v-43d28932] {\n  margin: 0;\n  font-size: 25px;\n  font-weight: bold;\n}\n.navbar[data-v-43d28932] {\n  height: 4rem;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 15px;\n}\n.navbar__left[data-v-43d28932] {\n  justify-content: start;\n}\n.navbar__shadow[data-v-43d28932] {\n  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1);\n}\n.navbar__brand[data-v-43d28932] {\n  font-family: Merriweather, serif;\n  font-weight: bold;\n  font-size: 1.2rem;\n  margin-left: 15px;\n  transition-duration: 0.3s;\n}\n.navbar__brand[data-v-43d28932]:hover {\n  opacity: 0.6;\n  transition-duration: 0.3s;\n}\n.navbar__menu[data-v-43d28932] {\n  display: flex;\n  align-items: center;\n}\n.navbar__menu a[data-v-43d28932] {\n  font-size: 14px;\n}\n.navbar__item a[data-v-43d28932] {\n  opacity: 0.8;\n  margin-right: 15px;\n}\n.thumbnail[data-v-43d28932] {\n  border-radius: 50%;\n  object-fit: cover;\n  width: 100%;\n  height: 100%;\n}\n.formButton[data-v-43d28932] {\n  border: solid 1.5px #282D6F;\n  border-radius: 40px;\n  font-weight: bold;\n  color: #282D6F;\n  transition-duration: 0.3s;\n}\n.formButton[data-v-43d28932]:hover {\n  transition-duration: 0.3s;\n  background-color: #282D6F;\n  color: white;\n}\n.formButton:hover i[data-v-43d28932] {\n  color: white;\n  transition-duration: 0.3s;\n}\n.button[data-v-43d28932] {\n  border: 1px solid rgba(40, 45, 111, 0.5);\n  border-radius: 0.25rem;\n  color: rgba(40, 45, 111, 0.6);\n  padding: 8px 15px;\n  background-color: rgba(40, 45, 111, 0.1);\n  transition-duration: 0.3s;\n}\n.button i[data-v-43d28932] {\n  color: rgba(40, 45, 111, 0.6);\n  margin-right: 5px;\n}\n.button[data-v-43d28932]:hover {\n  color: #282d6f;\n  border: 1px solid #282d6f;\n}\n.button:hover i[data-v-43d28932] {\n  color: #282d6f;\n}\n.tab[data-v-43d28932] {\n  display: flex;\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.tab__item[data-v-43d28932] {\n  border-bottom: 2px solid rgba(40, 45, 111, 0.6);\n  color: rgba(40, 45, 111, 0.6);\n  cursor: pointer;\n  margin: 0 1rem 0 0;\n  padding: 1rem;\n}\n.tab__item--active[data-v-43d28932] {\n  border-bottom: 2px solid #282D6F;\n  color: #282D6F;\n  font-weight: bold;\n}\n.container[data-v-43d28932] {\n  margin: 0 auto;\n  max-width: 1200px;\n  padding: 0 2%;\n}\n.container--small[data-v-43d28932] {\n  margin: 0 auto;\n  max-width: 600px;\n}\n.panel[data-v-43d28932] {\n  border: 1px solid rgba(40, 45, 111, 0.4);\n  margin-top: 1rem;\n  padding: 1.5rem;\n}\n.form__item[data-v-43d28932] {\n  border: 1px solid rgba(40, 45, 111, 0.4);\n  border-radius: 0.25rem;\n  font-size: 1rem;\n  margin-bottom: 1rem;\n  padding: 0.5em 0.75em;\n  width: 100%;\n}\n.form label[data-v-43d28932] {\n  display: block;\n  margin-bottom: 0.5rem;\n}\n.form__output[data-v-43d28932] {\n  display: block;\n  margin-bottom: 1rem;\n}\n.form__button[data-v-43d28932] {\n  text-align: right;\n}\n.errors[data-v-43d28932] {\n  border: 1px solid red;\n  border-radius: 0.25rem;\n  color: red;\n  margin-bottom: 1rem;\n}\n.pageTitle[data-v-43d28932] {\n  margin: 0 auto;\n  text-align: center;\n  padding: 20px 0;\n}\nbutton[data-v-43d28932] {\n  height: 40px;\n  padding: 0 40px;\n}\n.productDetail[data-v-43d28932] {\n  display: flex;\n  flex-flow: row wrap;\n  width: 1000px;\n  margin: 0 auto;\n  padding-top: 15px;\n}\n.button--liked[data-v-43d28932] {\n  background-color: hotpink;\n}\n.thumbnail[data-v-43d28932] {\n  width: 45px;\n  height: auto;\n}\n.productInformation[data-v-43d28932] {\n  width: 500px;\n  height: 400px;\n  margin-top: 15px;\n}\n.productInformation ul[data-v-43d28932] {\n  display: flex;\n}\n.productInformation ul li[data-v-43d28932] {\n  display: flex;\n  align-items: center;\n}\n.comments[data-v-43d28932] {\n  margin: 0 0 30px 30px;\n}\n.evaluations[data-v-43d28932] {\n  display: flex;\n}\n.evaluations i[data-v-43d28932] {\n  margin-right: 5px;\n}\n.evaluations p[data-v-43d28932] {\n  font-size: 16px;\n  margin-right: 30px;\n}", ""]);
 
 // exports
 
@@ -12314,17 +12318,27 @@ var render = function() {
               0
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "evaluations" }, [
-              _c("p", [
-                _c("i", { staticClass: "fas fa-heart heartIcon" }),
-                _vm._v(_vm._s(_vm.product.likes_count) + "\n            ")
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _c("i", { staticClass: "fas fa-eye" }),
-                _vm._v(_vm._s(_vm.product.countview))
-              ])
-            ])
+            _c(
+              "div",
+              { staticClass: "evaluations" },
+              [
+                _c("ThumbnailImage", {
+                  staticClass: "thumbnail",
+                  attrs: { user: _vm.product.user }
+                }),
+                _vm._v(" "),
+                _c("p", [
+                  _c("i", { staticClass: "fas fa-heart heartIcon" }),
+                  _vm._v(_vm._s(_vm.product.likes_count) + "\n            ")
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _c("i", { staticClass: "fas fa-eye" }),
+                  _vm._v(_vm._s(_vm.product.countview))
+                ])
+              ],
+              1
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "comments" }, [
