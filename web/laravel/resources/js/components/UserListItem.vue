@@ -1,11 +1,7 @@
 <template>
     <li>
         <router-link :to="`/users/${user.id}`" class="thumbnaillink">
-            <img
-                :src="user.userthumbnail.url"
-                :alt="`${user.name}のサムネイル`"
-                class="thumbnail"
-            />
+            <ThumbnailImage :user="user" class="thumbnail" />
         </router-link>
         <div class="userInformation">
             <router-link :to="`/users/${user.id}`"
@@ -41,13 +37,15 @@
 
 <script>
 import Product from "../components/Products/Product.vue";
+import ThumbnailImage from "../components/ThumbnailImage.vue";
 import Axios from "axios";
 import { OK } from "../util";
 import notification from "../mixin/notification";
 export default {
     mixins: [notification],
     components: {
-        Product
+        Product,
+        ThumbnailImage
     },
     props: {
         index: Number,

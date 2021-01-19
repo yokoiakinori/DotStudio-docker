@@ -1,11 +1,7 @@
 <template>
     <div class="userDetail">
         <div class="userInformation" v-if="appear">
-            <img
-                :src="user.userthumbnail.url"
-                :alt="`${user.name}のサムネイル`"
-                class="thumbnail infomationItem"
-            />
+            <ThumbnailImage :user="user" class="thumbnail infomationItem" />
             <div class="informationItem columen">
                 <h2 class="username">{{ user.name }}</h2>
                 <p class="userintroduction">{{ user.introduction }}</p>
@@ -74,12 +70,14 @@
 <script>
 import Pagination from "../components/Pagination.vue";
 import Product from "../components/Products/Product.vue";
+import ThumbnailImage from "../components/ThumbnailImage.vue";
 import Axios from "axios";
 import { OK, CREATED, UNPROCESSABLE_ENTITY } from "../util";
 export default {
     components: {
+        Pagination,
         Product,
-        Pagination
+        ThumbnailImage
     },
     props: {
         id: {
