@@ -1,8 +1,6 @@
 <template>
     <li>
-        <router-link :to="`/users/${user.id}`" class="thumbnaillink">
-            <ThumbnailImage :user="user" class="thumbnail" />
-        </router-link>
+        <ThumbnailImage :user="user" class="thumbnail" />
         <div class="userInformation">
             <router-link :to="`/users/${user.id}`"
                 ><h1>{{ user.name }}</h1></router-link
@@ -82,14 +80,16 @@ export default {
             return this.$store.getters["auth/username"];
         },
         productStyle() {
-            const product = `${this.maxwidth / 3}px`;
+            const appearProducts = 3;
+            const productSize = `${this.maxwidth / appearProducts}px`;
             return {
-                width: product,
-                height: product
+                width: productSize,
+                height: productSize
             };
         },
         products() {
-            return this.user.products.slice(0, 3);
+            const appearProducts = 3;
+            return this.user.products.slice(0, appearProducts);
         }
     },
     methods: {
@@ -133,7 +133,7 @@ button {
         color: white;
     }
 }
-.thumbnaillink {
+.thumbnail {
     width: 130px;
     height: 130px;
 }

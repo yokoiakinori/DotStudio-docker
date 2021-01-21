@@ -207,6 +207,10 @@ button {
 }
 .evaluations {
     display: flex;
+    align-items: center;
+    a {
+        margin-right: 15px;
+    }
     i {
         margin-right: 5px;
     }

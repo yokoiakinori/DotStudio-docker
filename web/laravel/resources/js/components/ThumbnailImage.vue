@@ -1,5 +1,11 @@
 <template>
-    <img :src="user.userthumbnail.url" :alt="`${user.name}のサムネイル`" />
+    <router-link :to="`/users/${user.id}`" class="thumbnaillink">
+        <img
+            :src="user.userthumbnail.url"
+            :alt="`${user.name}のサムネイル`"
+            class="thumbnail"
+        />
+    </router-link>
 </template>
 
 <script>
@@ -10,4 +16,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+@import "../../sass/common.scss";
+</style>
