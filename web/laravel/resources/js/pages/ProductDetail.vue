@@ -42,7 +42,11 @@
                 </li>
             </ul>
             <p v-else>まだコメントはありません。</p>
-            <form v-if="isLogin" @submit.prevent="addComment">
+            <form
+                v-if="isLogin"
+                @submit.prevent="addComment"
+                class="commentForm"
+            >
                 <div v-if="commentErrors">
                     <ul v-if="commentErrors.content">
                         <li v-for="msg in commentErrors.content" :key="msg">
@@ -204,6 +208,23 @@ button {
 }
 .comments {
     margin: 0 0 30px 30px;
+    width: 450px;
+}
+.commentForm {
+    background-color: white;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    textarea {
+        width: 100%;
+        height: 85px;
+        border: solid 1.5px rgba($color: $maincolor, $alpha: 0.6);
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
 }
 .evaluations {
     display: flex;

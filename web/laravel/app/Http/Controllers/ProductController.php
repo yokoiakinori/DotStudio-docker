@@ -102,7 +102,9 @@ class ProductController extends Controller
     {
         $product = Product::where('id', $id)->with(['user' => function ($query) {
             $query->with('userthumbnail');
-        }, 'comments.user', 'likes', 'producttags'])->first();
+        }, 'comments.user' => function ($query) {
+            $query->with('userthumbnail');
+        }, 'likes', 'producttags'])->first();
         Product::where('id', $id)->increment('countview');
         $usedMaterialList = explode("_", $product->usedmaterial);
         array_pop($usedMaterialList);
