@@ -36,10 +36,11 @@
         <div class="comments">
             <h2>Comments</h2>
             <ul v-if="product.comments.length > 0">
-                <li v-for="comment in product.comments" :key="comment.content">
-                    <p>{{ comment.content }}</p>
-                    <p>{{ comment.user.name }}</p>
-                </li>
+                <CommentListItem
+                    v-for="comment in product.comments"
+                    :key="comment.id"
+                    :comment="comment"
+                />
             </ul>
             <p v-else>まだコメントはありません。</p>
             <form
@@ -70,13 +71,15 @@ import { OK, CREATED, UNPROCESSABLE_ENTITY } from "../util";
 import Product from "../components/Products/Product.vue";
 import ProductTag from "../components/ProductTag.vue";
 import ThumbnailImage from "../components/ThumbnailImage.vue";
+import CommentListItem from "../components/CommentListItem.vue";
 import notification from "../mixin/notification";
 export default {
     mixins: [notification],
     components: {
         Product,
         ProductTag,
-        ThumbnailImage
+        ThumbnailImage,
+        CommentListItem
     },
     props: {
         id: {
@@ -219,6 +222,7 @@ button {
     border-radius: 10px;
     width: 100%;
     textarea {
+        padding: 10px;
         width: 100%;
         height: 85px;
         border: solid 1.5px rgba($color: $maincolor, $alpha: 0.6);

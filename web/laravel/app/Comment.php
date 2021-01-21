@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     protected $visible = [
-        'user','content',
+        'user', 'content', 'id'
     ];
 
     public function user()
