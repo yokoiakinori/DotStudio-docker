@@ -40,6 +40,7 @@
                     v-for="comment in product.comments"
                     :key="comment.id"
                     :comment="comment"
+                    class="commentItem"
                 />
             </ul>
             <p v-else>まだコメントはありません。</p>
@@ -210,7 +211,7 @@ button {
     }
 }
 .comments {
-    margin: 0 0 30px 30px;
+    margin: 0 30px;
     width: 450px;
 }
 .commentForm {
@@ -229,6 +230,10 @@ button {
         border-radius: 5px;
         margin-bottom: 20px;
     }
+}
+.commentItem {
+    border-bottom: solid 1px rgba($color: $maincolor, $alpha: 0.7);
+    padding: 25px 0;
 }
 .evaluations {
     display: flex;

@@ -1,8 +1,10 @@
 <template>
     <div>
         <ThumbnailImage :user="comment.user" class="thumbnail" />
-        <p>{{ comment.content }}</p>
-        <p>{{ comment.user.name }}</p>
+        <div class="content">
+            <p class="name">{{ comment.user.name }}</p>
+            <p>{{ comment.content }}</p>
+        </div>
     </div>
 </template>
 
@@ -25,6 +27,14 @@ div {
 }
 .thumbnail {
     width: 70px;
-    height: auto;
+    height: 70px;
+    margin-right: 20px;
+}
+.content {
+    display: flex;
+    flex-flow: column;
+}
+.name {
+    font-size: 13px;
 }
 </style>
